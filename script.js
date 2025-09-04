@@ -248,6 +248,19 @@ workItems.forEach((item, index) => {
                 console.log('Modal display:', getComputedStyle(videoModal).display);
                 console.log('Modal visibility:', getComputedStyle(videoModal).visibility);
                 console.log('Modal position:', videoModal.getBoundingClientRect());
+                console.log('Modal computed styles:', {
+                    position: getComputedStyle(videoModal).position,
+                    top: getComputedStyle(videoModal).top,
+                    left: getComputedStyle(videoModal).left,
+                    transform: getComputedStyle(videoModal).transform
+                });
+                
+                // Check body styles that might interfere
+                console.log('Body styles:', {
+                    position: getComputedStyle(document.body).position,
+                    transform: getComputedStyle(document.body).transform,
+                    overflow: getComputedStyle(document.body).overflow
+                });
                 
                 const modalContent = document.querySelector('.modal-content');
                 console.log('Modal content position:', modalContent.getBoundingClientRect());
@@ -257,6 +270,15 @@ workItems.forEach((item, index) => {
                 console.log('Video container position:', videoContainer.getBoundingClientRect());
                 
                 console.log('Video wrapper position:', videoWrapper.getBoundingClientRect());
+                
+                // Force position the modal as a test
+                videoModal.style.position = 'fixed';
+                videoModal.style.top = '0px';
+                videoModal.style.left = '0px';
+                videoModal.style.right = '0px';
+                videoModal.style.bottom = '0px';
+                videoModal.style.transform = 'none';
+                console.log('Force-positioned modal, new position:', videoModal.getBoundingClientRect());
             }, 100);
         } else {
             console.log('No project data found for:', projectId);
