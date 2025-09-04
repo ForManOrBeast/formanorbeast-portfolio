@@ -238,22 +238,46 @@ workItems.forEach((item, index) => {
             videoWrapper.appendChild(iframe);
             console.log('Appended iframe to wrapper');
             
-            // Create a completely new modal element to bypass constraints
+            // Check for parent constraints
+            let parent = document.body;
+            let constrainingParents = [];
+            while (parent && parent !== document.documentElement) {
+                const styles = getComputedStyle(parent);
+                if (styles.overflow !== 'visible' || styles.position !== 'static') {
+                    constrainingParents.push({
+                        element: parent,
+                        tagName: parent.tagName,
+                        className: parent.className,
+                        overflow: styles.overflow,
+                        position: styles.position
+                    });
+                }
+                parent = parent.parentElement;
+            }
+            console.log('Potentially constraining parents:', constrainingParents);
+            
+            // Create modal directly in document.body as first child
             const newModal = document.createElement('div');
+            newModal.id = 'emergency-modal';
             newModal.style.cssText = `
                 position: fixed !important;
                 top: 0 !important;
                 left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
                 width: 100vw !important;
                 height: 100vh !important;
                 background: rgba(0, 0, 0, 0.9) !important;
-                z-index: 999999 !important;
+                z-index: 2147483647 !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
                 margin: 0 !important;
-                padding: 20px !important;
+                padding: 0 !important;
             `;
+            
+            // Insert as first child of body
+            document.body.insertBefore(newModal, document.body.firstChild);
             
             newModal.innerHTML = `
                 <div style="
@@ -262,21 +286,29 @@ workItems.forEach((item, index) => {
                     padding: 20px;
                     max-width: 800px;
                     width: 90%;
+                    max-height: 80vh;
                     position: relative;
+                    overflow: auto;
                 ">
-                    <button onclick="this.parentElement.parentElement.remove(); document.body.style.overflow = ''" 
-                            style="position: absolute; top: -40px; right: 0; color: white; background: none; border: none; font-size: 30px; cursor: pointer;">&times;</button>
+                    <button id="emergency-close" style="position: absolute; top: -40px; right: 0; color: white; background: none; border: none; font-size: 30px; cursor: pointer;">&times;</button>
                     <h3>${project.title}</h3>
-                    <div style="background: blue; border: 2px solid green; height: 400px; display: flex; align-items: center; justify-content: center;">
-                        ${iframe.outerHTML}
+                    <div style="background: blue; border: 2px solid green; height: 500px; width: 100%; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 100%; height: 100%;">${iframe.outerHTML}</div>
                     </div>
                     <p>${project.description}</p>
                 </div>
             `;
             
-            document.body.appendChild(newModal);
+            // Add proper close functionality
+            document.getElementById('emergency-close').onclick = () => {
+                newModal.remove();
+                document.body.style.overflow = '';
+                document.body.style.overflowX = '';
+            };
+            
             document.body.style.overflow = 'hidden';
-            console.log('New modal created and added to body');
+            console.log('Emergency modal created as first body child');
+            console.log('Modal position:', newModal.getBoundingClientRect());
             
             // Debug modal visibility
             setTimeout(() => {
