@@ -283,7 +283,6 @@ workItems.forEach((item, index) => {
                 videoModal.style.justifyContent = 'center';
                 
                 // Also force position the modal content to be centered
-                const modalContent = document.querySelector('.modal-content');
                 modalContent.style.position = 'relative';
                 modalContent.style.margin = 'auto';
                 modalContent.style.maxWidth = '800px';
