@@ -280,6 +280,33 @@ workItems.forEach((item, index) => {
                 scrollX: window.scrollX
             });
             
+            // DEBUG: Check HTML and BODY computed styles
+            const htmlStyles = getComputedStyle(document.documentElement);
+            const bodyStyles = getComputedStyle(document.body);
+            
+            console.log('HTML element styles:', {
+                position: htmlStyles.position,
+                transform: htmlStyles.transform,
+                overflow: htmlStyles.overflow,
+                height: htmlStyles.height,
+                width: htmlStyles.width
+            });
+            
+            console.log('BODY element styles:', {
+                position: bodyStyles.position,
+                transform: bodyStyles.transform,
+                overflow: bodyStyles.overflow,
+                height: bodyStyles.height,
+                width: bodyStyles.width
+            });
+            
+            // Check if we're in an iframe or unusual context
+            console.log('Context check:', {
+                isInIframe: window !== window.top,
+                documentDomain: document.domain,
+                windowLocation: window.location.href
+            });
+            
             // Create the simplest possible test element
             const testDiv = document.createElement('div');
             testDiv.innerHTML = 'SIMPLE TEST DIV - IF YOU SEE THIS, POSITIONING WORKS';
