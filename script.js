@@ -262,6 +262,16 @@ workItems.forEach((item, index) => {
             document.body.style.position = 'static';
             document.body.style.transform = 'none';
             
+            // ALSO override hero section constraints
+            const heroSection = document.querySelector('.hero');
+            const originalHeroOverflow = heroSection ? heroSection.style.overflow : '';
+            const originalHeroPosition = heroSection ? heroSection.style.position : '';
+            if (heroSection) {
+                heroSection.style.overflow = 'visible';
+                heroSection.style.position = 'static';
+                console.log('Hero section constraints overridden');
+            }
+            
             // Try absolute positioning on html element instead
             const newModal = document.createElement('div');
             newModal.id = 'emergency-modal';
@@ -313,6 +323,11 @@ workItems.forEach((item, index) => {
                 // Restore original body styles
                 document.body.style.position = originalBodyPosition;
                 document.body.style.transform = originalBodyTransform;
+                // Restore hero section styles
+                if (heroSection) {
+                    heroSection.style.overflow = originalHeroOverflow;
+                    heroSection.style.position = originalHeroPosition;
+                }
             };
             
             document.body.style.overflow = 'hidden';
