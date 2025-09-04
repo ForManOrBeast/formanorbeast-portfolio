@@ -8,8 +8,8 @@
 :root {
     --primary-color: #ffffff;
     --secondary-color: #0a0a0a;
-    --accent-color: #cc5500;
-    --accent-secondary: #d2691e;
+    --accent-color: #a0522d;
+    --accent-secondary: #b8860b;
     --accent-tertiary: #4ecdc4;
     --accent-purple: #9b59b6;
     --accent-blue: #3498db;
@@ -20,16 +20,16 @@
     --text-secondary: rgba(255, 255, 255, 0.8);
     --blur-amount: 12px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --gradient-primary: linear-gradient(135deg, #cc5500 0%, #d2691e 50%, #4ecdc4 100%);
+    --gradient-primary: linear-gradient(135deg, #a0522d 0%, #b8860b 50%, #4ecdc4 100%);
     --gradient-secondary: linear-gradient(45deg, #9b59b6 0%, #3498db 50%, #f39c12 100%);
-    --gradient-depth: linear-gradient(135deg, rgba(204, 85, 0, 0.1) 0%, rgba(155, 89, 182, 0.1) 50%, rgba(52, 152, 219, 0.1) 100%);
+    --gradient-depth: linear-gradient(135deg, rgba(160, 82, 45, 0.1) 0%, rgba(155, 89, 182, 0.1) 50%, rgba(52, 152, 219, 0.1) 100%);
 }
 
 body {
     font-family: 'Inter', sans-serif;
     background: var(--secondary-color);
     background-image: 
-        radial-gradient(circle at 20% 50%, rgba(204, 85, 0, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 20% 50%, rgba(160, 82, 45, 0.03) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(155, 89, 182, 0.03) 0%, transparent 50%),
         radial-gradient(circle at 40% 80%, rgba(52, 152, 219, 0.03) 0%, transparent 50%);
     color: var(--text-primary);
@@ -49,7 +49,7 @@ body::before {
     width: 200%;
     height: 200%;
     background: 
-        radial-gradient(circle at 20% 20%, rgba(204, 85, 0, 0.02) 0%, transparent 40%),
+        radial-gradient(circle at 20% 20%, rgba(160, 82, 45, 0.02) 0%, transparent 40%),
         radial-gradient(circle at 80% 80%, rgba(155, 89, 182, 0.015) 0%, transparent 40%),
         radial-gradient(circle at 60% 40%, rgba(52, 152, 219, 0.01) 0%, transparent 40%);
     animation: float 20s ease-in-out infinite;
@@ -168,7 +168,7 @@ h1, h2, h3 {
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.37),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 0 1px rgba(204, 85, 0, 0.05);
+        0 0 0 1px rgba(160, 82, 45, 0.05);
     position: relative;
     overflow: hidden;
     transform-style: preserve-3d;
@@ -195,7 +195,7 @@ h1, h2, h3 {
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        0 0 0 1px rgba(204, 85, 0, 0.1);
+        0 0 0 1px rgba(160, 82, 45, 0.1);
 }
 
 .glass-card:hover::before {
@@ -229,7 +229,7 @@ h1, h2, h3 {
     font-size: 28px;
     letter-spacing: 3px;
     color: var(--accent-color);
-    text-shadow: 0 0 20px rgba(204, 85, 0, 0.5);
+    text-shadow: 0 0 20px rgba(160, 82, 45, 0.5);
 }
 
 .nav-menu {
@@ -291,7 +291,7 @@ h1, h2, h3 {
     /* Enhanced layered background with texture and depth */
     background: 
         /* Subtle noise texture */
-        radial-gradient(circle at 25% 25%, rgba(204, 85, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 25% 25%, rgba(160, 82, 45, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 75% 75%, rgba(155, 89, 182, 0.08) 0%, transparent 50%),
         radial-gradient(circle at 50% 10%, rgba(52, 152, 219, 0.06) 0%, transparent 50%),
         /* Main gradient overlay */
@@ -352,7 +352,7 @@ h1, h2, h3 {
     font-size: clamp(40px, 7vw, 72px);
     margin-bottom: 15px;
     color: var(--accent-color);
-    text-shadow: 0 0 40px rgba(204, 85, 0, 0.3);
+    text-shadow: 0 0 40px rgba(160, 82, 45, 0.3);
 }
 
 .hero-tagline {
@@ -373,12 +373,12 @@ h1, h2, h3 {
     transition: var(--transition);
     text-transform: uppercase;
     letter-spacing: 2px;
-    box-shadow: 0 4px 15px rgba(204, 85, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(160, 82, 45, 0.3);
 }
 
 .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(204, 85, 0, 0.5);
+    box-shadow: 0 6px 25px rgba(160, 82, 45, 0.5);
     background: linear-gradient(135deg, var(--accent-color), var(--accent-tertiary));
 }
 
@@ -430,7 +430,7 @@ section {
 .work-section {
     background: 
         /* Texture overlay */
-        radial-gradient(circle at 10% 20%, rgba(204, 85, 0, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 10% 20%, rgba(160, 82, 45, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 90% 80%, rgba(78, 205, 196, 0.04) 0%, transparent 40%),
         /* Main gradient */
         linear-gradient(180deg, rgba(10,10,10,0.92) 0%, rgba(15,15,15,0.95) 100%), 
@@ -462,7 +462,7 @@ section {
 .work-item:hover {
     transform: translateY(-15px) rotateX(5deg) scale(1.02);
     box-shadow: 
-        0 25px 50px rgba(204, 85, 0, 0.15),
+        0 25px 50px rgba(160, 82, 45, 0.15),
         0 10px 30px rgba(155, 89, 182, 0.1),
         0 5px 15px rgba(52, 152, 219, 0.1);
 }
@@ -513,12 +513,12 @@ section {
     justify-content: center;
     transform: scale(0) rotateZ(-180deg);
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 0 0 0 rgba(204, 85, 0, 0.3);
+    box-shadow: 0 0 0 0 rgba(160, 82, 45, 0.3);
 }
 
 .work-item:hover .play-icon {
     transform: scale(1) rotateZ(0deg);
-    box-shadow: 0 0 0 10px rgba(204, 85, 0, 0.1);
+    box-shadow: 0 0 0 10px rgba(160, 82, 45, 0.1);
 }
 
 .play-icon svg {
@@ -573,7 +573,7 @@ section {
 
 .skill-category:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 60px rgba(204, 85, 0, 0.2);
+    box-shadow: 0 20px 60px rgba(160, 82, 45, 0.2);
 }
 
 .skill-category:hover::before {
@@ -641,8 +641,8 @@ section {
 }
 
 .skill-tag {
-    background: rgba(204, 85, 0, 0.1);
-    border: 1px solid rgba(204, 85, 0, 0.3);
+    background: rgba(160, 82, 45, 0.1);
+    border: 1px solid rgba(160, 82, 45, 0.3);
     color: var(--text-primary);
     padding: 8px 16px;
     border-radius: 20px;
@@ -653,7 +653,7 @@ section {
 }
 
 .skill-tag:hover {
-    background: rgba(204, 85, 0, 0.2);
+    background: rgba(160, 82, 45, 0.2);
     border-color: var(--accent-color);
     transform: scale(1.05);
 }
@@ -762,7 +762,7 @@ section {
 .skill-tooltip-edit textarea:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(204, 85, 0, 0.2);
+    box-shadow: 0 0 0 2px rgba(160, 82, 45, 0.2);
 }
 
 .tooltip-buttons {
@@ -892,9 +892,9 @@ section {
     opacity: 1;
     transform: translateY(-4px) scale(1.05);
     background: var(--gradient-depth);
-    border-color: rgba(204, 85, 0, 0.2);
+    border-color: rgba(160, 82, 45, 0.2);
     box-shadow: 
-        0 10px 30px rgba(204, 85, 0, 0.15),
+        0 10px 30px rgba(160, 82, 45, 0.15),
         0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -975,8 +975,8 @@ section {
 }
 
 .blog-tag {
-    background: rgba(204, 85, 0, 0.1);
-    border: 1px solid rgba(204, 85, 0, 0.3);
+    background: rgba(160, 82, 45, 0.1);
+    border: 1px solid rgba(160, 82, 45, 0.3);
     color: var(--text-primary);
     padding: 6px 14px;
     border-radius: 16px;
@@ -986,7 +986,7 @@ section {
 }
 
 .blog-tag:hover {
-    background: rgba(204, 85, 0, 0.2);
+    background: rgba(160, 82, 45, 0.2);
     border-color: var(--accent-color);
 }
 
@@ -1008,7 +1008,7 @@ section {
     background: var(--accent-color);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(204, 85, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(160, 82, 45, 0.3);
 }
 
 .blog-link svg {
@@ -1087,7 +1087,7 @@ section {
 .about-personal {
     margin-top: 30px;
     padding: 20px;
-    background: rgba(204, 85, 0, 0.05);
+    background: rgba(160, 82, 45, 0.05);
     border-left: 3px solid var(--accent-color);
     border-radius: 0 10px 10px 0;
 }
@@ -1213,7 +1213,7 @@ section {
 
 .submit-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(204, 85, 0, 0.5);
+    box-shadow: 0 6px 25px rgba(160, 82, 45, 0.5);
 }
 
 .contact-alternative {
