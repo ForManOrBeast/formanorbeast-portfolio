@@ -232,157 +232,53 @@ workItems.forEach((item, index) => {
             videoWrapper.innerHTML = '';
             console.log('Cleared video wrapper');
             
-            // TEMPORARILY DISABLE VIDEO TO TEST POSITIONING
-            console.log('VIDEO DISABLED FOR POSITIONING TEST');
-            // const iframe = createVideoEmbed(project.videoUrl, project.platform);
-            // console.log('Created iframe:', iframe);
-            // videoWrapper.appendChild(iframe);
-            // console.log('Appended iframe to wrapper');
+            // Re-enable video now that positioning works
+            const iframe = createVideoEmbed(project.videoUrl, project.platform);
+            console.log('Created iframe:', iframe);
             
-            // NUCLEAR OPTION: Override ALL potential constraints
-            console.log('=== NUCLEAR MODAL OVERRIDE ===');
-            
-            // Store original styles
-            const originalStyles = new Map();
-            
-            // Override ALL elements with potential constraints
-            const allElements = document.querySelectorAll('*');
-            const constrainingElements = [];
-            
-            allElements.forEach(element => {
-                const styles = getComputedStyle(element);
-                if (styles.overflow !== 'visible' || styles.position === 'relative' || styles.position === 'fixed') {
-                    constrainingElements.push(element);
-                    originalStyles.set(element, {
-                        overflow: element.style.overflow,
-                        position: element.style.position,
-                        transform: element.style.transform
-                    });
-                    // Override the constraints
-                    element.style.overflow = 'visible';
-                    if (styles.position === 'relative') element.style.position = 'static';
-                    element.style.transform = 'none';
-                }
-            });
-            
-            console.log('Overrode', constrainingElements.length, 'constraining elements');
-            
-            // Also specifically target known problematic elements
-            document.body.style.position = 'static';
-            document.body.style.transform = 'none';
-            document.documentElement.style.overflow = 'visible';
-            
-            // DEBUG: Check viewport and window dimensions
-            console.log('Window dimensions:', {
-                innerWidth: window.innerWidth,
-                innerHeight: window.innerHeight,
-                scrollY: window.scrollY,
-                scrollX: window.scrollX
-            });
-            
-            // DEBUG: Check HTML and BODY computed styles
-            const htmlStyles = getComputedStyle(document.documentElement);
-            const bodyStyles = getComputedStyle(document.body);
-            
-            console.log('HTML element styles:', {
-                position: htmlStyles.position,
-                transform: htmlStyles.transform,
-                overflow: htmlStyles.overflow,
-                height: htmlStyles.height,
-                width: htmlStyles.width
-            });
-            
-            console.log('BODY element styles:', {
-                position: bodyStyles.position,
-                transform: bodyStyles.transform,
-                overflow: bodyStyles.overflow,
-                height: bodyStyles.height,
-                width: bodyStyles.width
-            });
-            
-            // Check if we're in an iframe or unusual context
-            console.log('Context check:', {
-                isInIframe: window !== window.top,
-                documentDomain: document.domain,
-                windowLocation: window.location.href
-            });
-            
-            // Create the simplest possible test element
-            const testDiv = document.createElement('div');
-            testDiv.innerHTML = 'SIMPLE TEST DIV - IF YOU SEE THIS, POSITIONING WORKS';
-            testDiv.style.cssText = `
-                position: fixed;
-                top: 50px;
-                left: 50px;
-                width: 400px;
-                height: 200px;
-                background: lime;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-                z-index: 2147483647;
-                border: 5px solid magenta;
-                padding: 20px;
-            `;
-            
-            document.documentElement.appendChild(testDiv);
-            console.log('Test div position:', testDiv.getBoundingClientRect());
-            
-            // FIXED: Account for scroll position!
+            // CREATE PROPER VIDEO MODAL with scroll-aware positioning
             const scrollY = window.scrollY;
-            console.log('FIXING SCROLL OFFSET:', scrollY);
+            console.log('Creating video modal at scroll position:', scrollY);
             
-            const absoluteTest = document.createElement('div');
-            absoluteTest.innerHTML = `
-                <div style="text-align: center;">
-                    <h1>SUCCESS! SCROLL-AWARE MODAL</h1>
-                    <p>Scroll position was: ${scrollY}px</p>
-                    <p>Modal now positioned correctly!</p>
-                    <p>This should cover the ENTIRE viewport</p>
-                </div>
-            `;
-            absoluteTest.style.cssText = `
+            const videoModal = document.createElement('div');
+            videoModal.style.cssText = `
                 position: absolute;
                 top: ${scrollY}px;
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background: rgba(0, 255, 0, 0.9);
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
+                background: rgba(0, 0, 0, 0.9);
                 z-index: 2147483647;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                text-align: center;
                 padding: 20px;
             `;
             
-            document.documentElement.appendChild(absoluteTest);
-            console.log('Absolute test position:', absoluteTest.getBoundingClientRect());
+            videoModal.innerHTML = `
+                <div style="
+                    background: var(--glass-bg);
+                    backdrop-filter: blur(12px);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 20px;
+                    padding: 30px;
+                    max-width: 900px;
+                    width: 90%;
+                    position: relative;
+                ">
+                    <button onclick="this.closest('div').parentElement.remove(); document.body.style.overflow = ''" 
+                            style="position: absolute; top: -40px; right: 0; color: white; background: none; border: none; font-size: 40px; cursor: pointer;">&times;</button>
+                    <h3 style="color: var(--accent-color); margin-bottom: 20px; text-align: center;">${project.title}</h3>
+                    <div style="width: 100%; height: 500px; background: #000; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+                        ${iframe.outerHTML}
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 20px; line-height: 1.6;">${project.description}</p>
+                </div>
+            `;
             
-            // Add close button to test modal
-            const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = 'CLOSE TEST';
-            closeBtn.style.cssText = 'position: absolute; top: 5px; right: 5px; z-index: 1000000;';
-            closeBtn.onclick = () => {
-                testDiv.remove();
-                absoluteTest.remove();
-                
-                // Restore ALL overridden styles
-                originalStyles.forEach((originalStyle, element) => {
-                    element.style.overflow = originalStyle.overflow;
-                    element.style.position = originalStyle.position;
-                    element.style.transform = originalStyle.transform;
-                });
-                
-                document.body.style.overflow = '';
-            };
-            absoluteTest.appendChild(closeBtn);
-            
+            document.documentElement.appendChild(videoModal);
             document.body.style.overflow = 'hidden';
-            console.log('Simple test modals created');
+            console.log('Video modal created successfully!');
             
             // Debug modal visibility
             setTimeout(() => {
