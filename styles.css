@@ -252,7 +252,7 @@ h1, h2, h3 {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--accent-color);
+    background: var(--accent-tertiary);
     transition: width 0.3s ease;
 }
 
@@ -365,7 +365,7 @@ h1, h2, h3 {
 .cta-button {
     display: inline-block;
     padding: 15px 40px;
-    background: linear-gradient(135deg, var(--accent-color), #cc0000);
+    background: linear-gradient(135deg, var(--accent-tertiary), #00cc66);
     color: var(--text-primary);
     text-decoration: none;
     border-radius: 50px;
@@ -421,7 +421,7 @@ section {
 .title-underline {
     width: 80px;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent-color), var(--accent-tertiary));
+    background: linear-gradient(90deg, var(--accent-tertiary), #00ff88);
     margin: 0 auto;
     border-radius: 2px;
 }
@@ -784,7 +784,7 @@ section {
 }
 
 .tooltip-save-btn {
-    background: var(--accent-color);
+    background: var(--accent-tertiary);
     color: white;
 }
 
@@ -921,7 +921,7 @@ section {
 }
 
 .client-logo:hover .client-name {
-    background: linear-gradient(135deg, var(--accent-color), #cc0000);
+    background: linear-gradient(135deg, var(--accent-tertiary), #00cc66);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1005,7 +1005,7 @@ section {
 }
 
 .blog-link:hover {
-    background: var(--accent-color);
+    background: var(--accent-tertiary);
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
@@ -1198,7 +1198,7 @@ section {
 
 .submit-button {
     padding: 15px 40px;
-    background: linear-gradient(135deg, var(--accent-color), #cc0000);
+    background: linear-gradient(135deg, var(--accent-tertiary), #00cc66);
     color: var(--text-primary);
     border: none;
     border-radius: 50px;
