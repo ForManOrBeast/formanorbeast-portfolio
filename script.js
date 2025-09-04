@@ -271,54 +271,63 @@ workItems.forEach((item, index) => {
             document.body.style.transform = 'none';
             document.documentElement.style.overflow = 'visible';
             
-            // Try absolute positioning on html element instead
+            // DEBUG: Check viewport and window dimensions
+            console.log('Window dimensions:', {
+                innerWidth: window.innerWidth,
+                innerHeight: window.innerHeight,
+                scrollY: window.scrollY,
+                scrollX: window.scrollX
+            });
+            
+            // Create the simplest possible test element
+            const testDiv = document.createElement('div');
+            testDiv.innerHTML = 'SIMPLE TEST DIV - IF YOU SEE THIS, POSITIONING WORKS';
+            testDiv.style.cssText = `
+                position: fixed;
+                top: 50px;
+                left: 50px;
+                width: 400px;
+                height: 200px;
+                background: lime;
+                color: black;
+                font-size: 20px;
+                font-weight: bold;
+                z-index: 999999;
+                border: 5px solid magenta;
+                padding: 20px;
+            `;
+            
+            document.body.appendChild(testDiv);
+            console.log('Test div position:', testDiv.getBoundingClientRect());
+            
+            // Also try with our modal
             const newModal = document.createElement('div');
             newModal.id = 'emergency-modal';
+            newModal.innerHTML = 'EMERGENCY MODAL - RED BACKGROUND';
             newModal.style.cssText = `
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                bottom: 0 !important;
-                width: 100vw !important;
-                height: 100vh !important;
-                background: rgba(255, 0, 0, 0.8) !important;
-                z-index: 2147483647 !important;
-                display: block !important;
-                margin: 0 !important;
-                padding: 20px !important;
+                position: fixed;
+                top: 100px;
+                left: 100px;
+                width: 300px;
+                height: 150px;
+                background: red;
+                color: white;
+                font-size: 16px;
+                z-index: 999998;
+                border: 3px solid yellow;
+                padding: 10px;
             `;
             
-            // Attach to html element
-            document.documentElement.appendChild(newModal);
-            console.log('Modal attached to documentElement');
+            document.body.appendChild(newModal);
+            console.log('Simple modal position:', newModal.getBoundingClientRect());
             
-            newModal.innerHTML = `
-                <div style="
-                    background: yellow;
-                    border: 10px solid blue;
-                    padding: 20px;
-                    width: 600px;
-                    height: 400px;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                ">
-                    <button id="emergency-close" style="position: absolute; top: 10px; right: 10px; color: black; background: white; border: 2px solid black; font-size: 20px; cursor: pointer; padding: 5px 10px;">CLOSE</button>
-                    <h3 style="color: black;">MODAL TEST - ${project.title}</h3>
-                    <div style="background: green; border: 2px solid black; height: 200px; width: 100%; margin: 10px 0;">
-                        VIDEO AREA: ${iframe.outerHTML}
-                    </div>
-                    <p style="color: black; font-size: 14px;">${project.description}</p>
-                </div>
-            `;
-            
-            // Add proper close functionality
-            document.getElementById('emergency-close').onclick = () => {
+            // Add close button to test modal
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = 'CLOSE TEST';
+            closeBtn.style.cssText = 'position: absolute; top: 5px; right: 5px; z-index: 1000000;';
+            closeBtn.onclick = () => {
+                testDiv.remove();
                 newModal.remove();
-                document.body.style.overflow = '';
-                document.body.style.overflowX = '';
                 
                 // Restore ALL overridden styles
                 originalStyles.forEach((originalStyle, element) => {
@@ -326,13 +335,11 @@ workItems.forEach((item, index) => {
                     element.style.position = originalStyle.position;
                     element.style.transform = originalStyle.transform;
                 });
-                
-                console.log('Restored all original styles');
             };
+            newModal.appendChild(closeBtn);
             
             document.body.style.overflow = 'hidden';
-            console.log('Emergency modal created as first body child');
-            console.log('Modal position:', newModal.getBoundingClientRect());
+            console.log('Simple test modals created');
             
             // Debug modal visibility
             setTimeout(() => {
