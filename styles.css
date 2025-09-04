@@ -1150,8 +1150,6 @@ section {
     display: flex !important;
     flex-direction: column !important;
     z-index: 100001 !important;
-    background: red !important;
-    border: 5px solid yellow !important;
     margin: auto !important;
     transform: none !important;
 }
@@ -1175,7 +1173,7 @@ section {
 
 .modal-video-container {
     width: 100%;
-    background: blue !important;
+    background: #000;
     border-radius: 15px;
     overflow: hidden;
     z-index: 100002;
