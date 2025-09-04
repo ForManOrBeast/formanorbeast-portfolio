@@ -642,6 +642,10 @@ class SkillTooltip {
         // If tooltip would be cut off at top, show it below cursor instead
         if (top < 10) {
             top = y + 15;
+            // But ensure it doesn't extend beyond viewport bottom
+            if (top + tooltipRect.height > viewportHeight - 10) {
+                top = viewportHeight - tooltipRect.height - 10;
+            }
         }
         
         this.tooltip.style.left = left + 'px';
