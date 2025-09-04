@@ -262,46 +262,46 @@ workItems.forEach((item, index) => {
             document.body.style.position = 'static';
             document.body.style.transform = 'none';
             
-            // Create modal directly in document.body as first child
+            // Try absolute positioning on html element instead
             const newModal = document.createElement('div');
             newModal.id = 'emergency-modal';
             newModal.style.cssText = `
-                position: fixed !important;
+                position: absolute !important;
                 top: 0 !important;
                 left: 0 !important;
                 right: 0 !important;
                 bottom: 0 !important;
                 width: 100vw !important;
                 height: 100vh !important;
-                background: rgba(0, 0, 0, 0.9) !important;
+                background: rgba(255, 0, 0, 0.8) !important;
                 z-index: 2147483647 !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
+                display: block !important;
                 margin: 0 !important;
-                padding: 0 !important;
+                padding: 20px !important;
             `;
             
-            // Insert as first child of body
-            document.body.insertBefore(newModal, document.body.firstChild);
+            // Attach to html element
+            document.documentElement.appendChild(newModal);
+            console.log('Modal attached to documentElement');
             
             newModal.innerHTML = `
                 <div style="
-                    background: red;
-                    border: 5px solid yellow;
+                    background: yellow;
+                    border: 10px solid blue;
                     padding: 20px;
-                    max-width: 800px;
-                    width: 90%;
-                    max-height: 80vh;
-                    position: relative;
-                    overflow: auto;
+                    width: 600px;
+                    height: 400px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                 ">
-                    <button id="emergency-close" style="position: absolute; top: -40px; right: 0; color: white; background: none; border: none; font-size: 30px; cursor: pointer;">&times;</button>
-                    <h3>${project.title}</h3>
-                    <div style="background: blue; border: 2px solid green; height: 500px; width: 100%; display: flex; align-items: center; justify-content: center;">
-                        <div style="width: 100%; height: 100%;">${iframe.outerHTML}</div>
+                    <button id="emergency-close" style="position: absolute; top: 10px; right: 10px; color: black; background: white; border: 2px solid black; font-size: 20px; cursor: pointer; padding: 5px 10px;">CLOSE</button>
+                    <h3 style="color: black;">MODAL TEST - ${project.title}</h3>
+                    <div style="background: green; border: 2px solid black; height: 200px; width: 100%; margin: 10px 0;">
+                        VIDEO AREA: ${iframe.outerHTML}
                     </div>
-                    <p>${project.description}</p>
+                    <p style="color: black; font-size: 14px;">${project.description}</p>
                 </div>
             `;
             
