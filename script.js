@@ -238,12 +238,45 @@ workItems.forEach((item, index) => {
             videoWrapper.appendChild(iframe);
             console.log('Appended iframe to wrapper');
             
-            // Move modal to body to escape any positioning context
-            document.body.appendChild(videoModal);
+            // Create a completely new modal element to bypass constraints
+            const newModal = document.createElement('div');
+            newModal.style.cssText = `
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                background: rgba(0, 0, 0, 0.9) !important;
+                z-index: 999999 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 !important;
+                padding: 20px !important;
+            `;
             
-            videoModal.classList.add('active');
+            newModal.innerHTML = `
+                <div style="
+                    background: red;
+                    border: 5px solid yellow;
+                    padding: 20px;
+                    max-width: 800px;
+                    width: 90%;
+                    position: relative;
+                ">
+                    <button onclick="this.parentElement.parentElement.remove(); document.body.style.overflow = ''" 
+                            style="position: absolute; top: -40px; right: 0; color: white; background: none; border: none; font-size: 30px; cursor: pointer;">&times;</button>
+                    <h3>${project.title}</h3>
+                    <div style="background: blue; border: 2px solid green; height: 400px; display: flex; align-items: center; justify-content: center;">
+                        ${iframe.outerHTML}
+                    </div>
+                    <p>${project.description}</p>
+                </div>
+            `;
+            
+            document.body.appendChild(newModal);
             document.body.style.overflow = 'hidden';
-            console.log('Modal should now be visible');
+            console.log('New modal created and added to body');
             
             // Debug modal visibility
             setTimeout(() => {
