@@ -238,6 +238,9 @@ workItems.forEach((item, index) => {
             videoWrapper.appendChild(iframe);
             console.log('Appended iframe to wrapper');
             
+            // Move modal to body to escape any positioning context
+            document.body.appendChild(videoModal);
+            
             videoModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             console.log('Modal should now be visible');
