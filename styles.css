@@ -379,6 +379,7 @@ h1, h2, h3 {
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 25px rgba(255, 51, 51, 0.5);
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-tertiary));
 }
 
 .scroll-indicator {
@@ -392,9 +393,10 @@ h1, h2, h3 {
 .scroll-arrow {
     width: 30px;
     height: 30px;
-    border-right: 2px solid var(--text-secondary);
-    border-bottom: 2px solid var(--text-secondary);
+    border-right: 2px solid var(--accent-tertiary);
+    border-bottom: 2px solid var(--accent-tertiary);
     transform: rotate(45deg);
+    filter: drop-shadow(0 0 5px rgba(78, 205, 196, 0.3));
 }
 
 /* Section Styles */
@@ -419,7 +421,7 @@ section {
 .title-underline {
     width: 80px;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent-color), transparent);
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-tertiary));
     margin: 0 auto;
     border-radius: 2px;
 }
@@ -657,8 +659,8 @@ section {
 }
 
 .skill-tag.featured-skill {
-    background: linear-gradient(135deg, rgba(255, 51, 51, 0.2), rgba(255, 51, 51, 0.15));
-    border: 1px solid var(--accent-color);
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(78, 205, 196, 0.15));
+    border: 1px solid var(--accent-tertiary);
     font-weight: 600;
     position: relative;
     overflow: hidden;
@@ -670,9 +672,9 @@ section {
 }
 
 .skill-tag.featured-skill:hover {
-    background: linear-gradient(135deg, rgba(255, 51, 51, 0.3), rgba(255, 51, 51, 0.2));
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.3), rgba(78, 205, 196, 0.2));
     transform: scale(1.08);
-    box-shadow: 0 4px 20px rgba(255, 51, 51, 0.3);
+    box-shadow: 0 4px 20px rgba(78, 205, 196, 0.4);
 }
 
 /* Skill Tooltip */
@@ -1227,8 +1229,19 @@ section {
     transition: var(--transition);
 }
 
+.email-link {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-tertiary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .email-link:hover {
-    text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+    text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+    background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* Video Modal */
