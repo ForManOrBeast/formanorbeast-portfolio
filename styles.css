@@ -1146,6 +1146,8 @@ section {
     display: flex;
     flex-direction: column;
     z-index: 100001;
+    background: red !important;
+    border: 5px solid yellow !important;
 }
 
 .modal-close {
@@ -1167,21 +1169,23 @@ section {
 
 .modal-video-container {
     width: 100%;
-    background: #000;
+    background: blue !important;
     border-radius: 15px;
     overflow: hidden;
     z-index: 100002;
     position: relative;
+    border: 3px solid green !important;
 }
 
 .video-wrapper {
     width: 100%;
     height: 500px;
-    background: #000;
+    background: orange !important;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid purple !important;
 }
 
 .video-wrapper iframe {
