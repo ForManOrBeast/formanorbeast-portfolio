@@ -256,6 +256,12 @@ workItems.forEach((item, index) => {
             }
             console.log('Potentially constraining parents:', constrainingParents);
             
+            // Temporarily override body positioning
+            const originalBodyPosition = document.body.style.position;
+            const originalBodyTransform = document.body.style.transform;
+            document.body.style.position = 'static';
+            document.body.style.transform = 'none';
+            
             // Create modal directly in document.body as first child
             const newModal = document.createElement('div');
             newModal.id = 'emergency-modal';
@@ -304,6 +310,9 @@ workItems.forEach((item, index) => {
                 newModal.remove();
                 document.body.style.overflow = '';
                 document.body.style.overflowX = '';
+                // Restore original body styles
+                document.body.style.position = originalBodyPosition;
+                document.body.style.transform = originalBodyTransform;
             };
             
             document.body.style.overflow = 'hidden';
