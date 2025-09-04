@@ -1,0 +1,16 @@
+# System files
+.DS_Store
+Thumbs.db
+nul
+
+# Claude settings
+.claude/
+
+# Development files
+*.log
+*.tmp
+
+# Optional: Exclude domain transfer guide (contains sensitive info)
+domain-transfer-guide.md
+emailjs-config.md
+ForManOrBeast_Prompt.md

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - For Man or Beast</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .blog-page {
+            background: #0a0a0a;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .blog-post {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .blog-post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+        .blog-post-date {
+            color: var(--accent-color);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .blog-post-title {
+            color: var(--text-primary);
+            font-family: 'Bebas Neue', cursive;
+            font-size: 32px;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        .blog-post-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        .blog-post-content p {
+            margin-bottom: 20px;
+        }
+        .blog-post-content p:last-child {
+            margin-bottom: 0;
+        }
+        .blog-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .blog-header h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 48px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        .blog-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+        .back-to-site {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 40px;
+            transition: var(--transition);
+        }
+        .back-to-site:hover {
+            transform: translateX(-5px);
+        }
+        .back-to-site svg {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-page">
+        <div class="blog-container">
+            <a href="index.html" class="back-to-site">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back to Portfolio
+            </a>
+            
+            <div class="blog-header">
+                <h1>For Man or Beast Blog</h1>
+                <p>Insights, experiences, and thoughts on video production</p>
+            </div>
+
+            <article class="blog-post">
+                <div class="blog-post-date">January 28, 2025</div>
+                <h2 class="blog-post-title">Welcome to 2025</h2>
+                <div class="blog-post-content">
+                    <p>Good lord. What has happened to the world? The speed at which everything is changing is insane. I suppose in some ways it's good, in other ways maybe not so much. AI is just mind blowing right now. The difference between a year ago and today is staggering. What is going to happen by the end of this year? I have no clue.</p>
+                    
+                    <p>A lot has changed in my personal life as well. I now have two children! Bert the dog has had to learn how to share me with two tiny humans, and he's doing a good job. The little ones are amazing and exhausting and I love them to death.</p>
+                    
+                    <p>I've been playing with AI for rewriting and tweaking text. It's amazing how it can take something I've written and make it better, or just different. I can ask it to make it more professional, more casual, more funny, more serious, etc. It's like having a writing assistant that never gets tired and is always available. This paragraph was originally much different, but I asked AI to rewrite it to be more conversational and engaging. Did it work? You tell me.</p>
+                </div>
+            </article>
+
+            <article class="blog-post">
+                <div class="blog-post-date">October 27, 2022</div>
+                <h2 class="blog-post-title">It's been well over a year since my last blog post...</h2>
+                <div class="blog-post-content">
+                    <p>...and I'm not sure if anyone has noticed. I've been busy with work and life, and writing has taken a back seat. I've been meaning to write more, but I keep getting distracted by shiny objects and new projects.</p>
+                    
+                    <p>Adobe has been updating their software at a breakneck pace. Premiere Pro has gotten some really nice improvements, especially in the performance department. The new Speech to Text feature is pretty amazing, though it's not perfect. It's still faster than transcribing manually, and you can always go back and fix the mistakes.</p>
+                    
+                    <p>I've been thinking a lot about editing techniques lately. There's something to be said for the old-school approach of letting scenes breathe, of not cutting every 2 seconds just because you can. Some of my favorite films have long takes that really draw you in. Modern editing can be exhausting sometimes.</p>
+                    
+                    <p>On a completely unrelated note, I got a new keyboard and I'm loving it. It's a mechanical keyboard with Cherry MX Brown switches. The tactile feedback is really satisfying, and it makes typing feel more deliberate and purposeful. Sometimes it's the little things that make a big difference in your daily workflow.</p>
+                </div>
+            </article>
+
+            <article class="blog-post">
+                <div class="blog-post-date">February 23, 2021</div>
+                <h2 class="blog-post-title">Welcome to 2021 - Recording and editing video chats are here...</h2>
+                <div class="blog-post-content">
+                    <p>...and they're probably here to stay. Whether you love them or hate them, video calls have become a huge part of how we communicate, both personally and professionally. And with that comes the need to record and edit these conversations.</p>
+                    
+                    <p>I've been getting more requests to edit Zoom meetings, webinars, and other video conference content. Here are some tips I've learned along the way:</p>
+                    
+                    <p><strong>Recording Settings:</strong> Always record in the highest quality available. Zoom's default settings are usually fine, but if you have the option, record locally rather than to the cloud for better quality. Make sure everyone's camera is on and their lighting is decent - you can't fix bad lighting in post, but you can make good lighting look great.</p>
+                    
+                    <p><strong>Audio is Everything:</strong> Bad audio will kill a video faster than bad video. Encourage participants to use headphones and a decent microphone if possible. The built-in mics on laptops are usually terrible. A simple USB headset will make a world of difference.</p>
+                    
+                    <p><strong>Background Considerations:</strong> Those virtual backgrounds can be distracting and often glitch. A clean, simple background is usually better. If you must use a virtual background, make sure your computer can handle it without dropping frames.</p>
+                    
+                    <p><strong>Editing Tips:</strong> Remove the awkward hellos and goodbyes unless they're important. Cut out the technical difficulties. Use jump cuts liberally - people expect faster pacing in online content. Don't be afraid to use picture-in-picture to show multiple participants at once.</p>
+                    
+                    <p>The world has changed, and our editing needs have changed with it. Embrace the new normal and find ways to make even mundane Zoom calls engaging to watch.</p>
+                </div>
+            </article>
+
+            <article class="blog-post">
+                <div class="blog-post-date">July 15, 2020</div>
+                <h2 class="blog-post-title">The Right Tools for the Job: An Editor's Toolbelt</h2>
+                <div class="blog-post-content">
+                    <p>As an editor, your tools are everything. Having the right hardware and software can mean the difference between a smooth workflow and a frustrating slog through technical problems. After 25+ years in this business, I've learned a thing or two about what works and what doesn't.</p>
+                    
+                    <p><strong>The Computer:</strong> This is your most important tool. Don't cheap out. You want a fast CPU, plenty of RAM (32GB minimum for 4K work), and a dedicated graphics card. I prefer building my own systems because I can control every component and upgrade as needed. But if you're not comfortable building, there are some great pre-built options from companies like Puget Systems.</p>
+                    
+                    <p><strong>Storage:</strong> You need fast storage for your media and even faster storage for your scratch disks. I recommend a setup with multiple drives: an SSD for your OS and applications, a fast SSD for your current projects, and larger traditional drives for long-term storage. Never work directly off a single drive - always have backups.</p>
+                    
+                    <p><strong>Monitors:</strong> Get the best monitor you can afford. Color accuracy matters, even if you're not doing final color correction. I recommend at least a 27" 4K monitor, calibrated properly. If you can afford dual monitors, even better - one for your timeline and one for your viewer.</p>
+                    
+                    <p><strong>Audio:</strong> Don't forget about audio monitoring. A good set of studio monitors and quality headphones are essential. Your built-in computer speakers won't cut it for professional work.</p>
+                    
+                    <p><strong>Backup Strategy:</strong> This cannot be overstated - you MUST have a solid backup strategy. I use a 3-2-1 approach: 3 copies of important data, on 2 different types of media, with 1 copy offsite. It might seem like overkill until you lose a project to drive failure.</p>
+                    
+                    <p><strong>Software:</strong> Obviously you need editing software, but don't forget about the utilities. Drive monitoring software, backup software, codec packs, and maintenance utilities are all part of a professional setup.</p>
+                    
+                    <p>Remember, these tools are investments in your business. Buy once, cry once - get quality gear that will last and pay for itself over time. Your future self will thank you.</p>
+                </div>
+            </article>
+
+            <article class="blog-post">
+                <div class="blog-post-date">July 15, 2020</div>
+                <h2 class="blog-post-title">What's with the blog?</h2>
+                <div class="blog-post-content">
+                    <p>To be honest, I'm not much of a blogger. I've never been one to regularly put my thoughts out into the world for everyone to see. But I figured it might be useful to share some of the things I've learned over the years in this business.</p>
+                    
+                    <p>Video editing and post-production can be a pretty solitary profession. You spend most of your time alone in a dark room, staring at screens, making tiny adjustments that hopefully no one will notice. But there's a lot that goes into creating that seamless final product, and maybe some of those insights could be helpful to others.</p>
+                    
+                    <p>So this blog will be a mix of technical tips, gear recommendations, industry observations, and probably some random thoughts about whatever happens to be on my mind. I can't promise I'll post regularly - when inspiration strikes, it strikes. But I'll try to make it worth your time when I do.</p>
+                    
+                    <p>If you have questions or topics you'd like me to cover, feel free to reach out. I'm always happy to talk shop with fellow editors and creatives. After all, we're all just trying to tell better stories, right?</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</body>
+</html>
