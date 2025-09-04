@@ -241,6 +241,7 @@ workItems.forEach((item, index) => {
             console.log('Creating video modal at scroll position:', scrollY);
             
             const videoModal = document.createElement('div');
+            videoModal.id = 'video-modal-overlay';
             videoModal.style.cssText = `
                 position: absolute;
                 top: ${scrollY}px;
@@ -253,7 +254,21 @@ workItems.forEach((item, index) => {
                 align-items: center;
                 justify-content: center;
                 padding: 20px;
+                cursor: pointer;
             `;
+            
+            // Close modal function
+            const closeVideoModal = () => {
+                videoModal.remove();
+                document.body.style.overflow = '';
+            };
+            
+            // Click on overlay to close
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) {
+                    closeVideoModal();
+                }
+            });
             
             videoModal.innerHTML = `
                 <div style="
@@ -265,9 +280,9 @@ workItems.forEach((item, index) => {
                     max-width: 900px;
                     width: 90%;
                     position: relative;
-                ">
-                    <button onclick="this.closest('div').parentElement.remove(); document.body.style.overflow = ''" 
-                            style="position: absolute; top: -40px; right: 0; color: white; background: none; border: none; font-size: 40px; cursor: pointer;">&times;</button>
+                    cursor: default;
+                " onclick="event.stopPropagation()">
+                    <button id="modal-close-btn" style="position: absolute; top: -40px; right: 0; color: white; background: none; border: none; font-size: 40px; cursor: pointer;">&times;</button>
                     <h3 style="color: var(--accent-color); margin-bottom: 20px; text-align: center;">${project.title}</h3>
                     <div style="width: 100%; aspect-ratio: 16/9; background: #000; position: relative; overflow: hidden;">
                         <iframe src="${iframe.src}" 
@@ -283,6 +298,22 @@ workItems.forEach((item, index) => {
             
             document.documentElement.appendChild(videoModal);
             document.body.style.overflow = 'hidden';
+            
+            // Connect close button
+            const closeBtn = document.getElementById('modal-close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeVideoModal);
+            }
+            
+            // Also close on Escape key
+            const escapeHandler = (e) => {
+                if (e.key === 'Escape') {
+                    closeVideoModal();
+                    document.removeEventListener('keydown', escapeHandler);
+                }
+            };
+            document.addEventListener('keydown', escapeHandler);
+            
             console.log('Video modal created successfully!');
             
             // Debug modal visibility
