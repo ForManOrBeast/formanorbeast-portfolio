@@ -72,6 +72,15 @@ const modalTitle = document.getElementById('modalTitle');
 const modalDescription = document.getElementById('modalDescription');
 const workItems = document.querySelectorAll('.work-item');
 
+// Debug: Check if elements exist
+console.log('Video modal elements check:');
+console.log('videoModal:', videoModal);
+console.log('modalClose:', modalClose);
+console.log('videoWrapper:', videoWrapper);
+console.log('modalTitle:', modalTitle);
+console.log('modalDescription:', modalDescription);
+console.log('workItems count:', workItems.length);
+
 // Sample video data with YouTube and Vimeo links
 const videoData = {
     netflix: {
@@ -197,22 +206,32 @@ function createVideoEmbed(url, platform) {
 
 workItems.forEach(item => {
     item.addEventListener('click', () => {
+        console.log('Work item clicked!');
         const projectId = item.dataset.project;
+        console.log('Project ID:', projectId);
         const project = videoData[projectId];
+        console.log('Project data:', project);
         
         if (project) {
+            console.log('Setting modal content...');
             modalTitle.textContent = project.title;
             modalDescription.textContent = project.description;
             
             // Clear previous iframe
             videoWrapper.innerHTML = '';
+            console.log('Cleared video wrapper');
             
             // Create and append new iframe
             const iframe = createVideoEmbed(project.videoUrl, project.platform);
+            console.log('Created iframe:', iframe);
             videoWrapper.appendChild(iframe);
+            console.log('Appended iframe to wrapper');
             
             videoModal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            console.log('Modal should now be visible');
+        } else {
+            console.log('No project data found for:', projectId);
         }
     });
 });
