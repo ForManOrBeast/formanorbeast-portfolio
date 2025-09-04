@@ -298,57 +298,32 @@ workItems.forEach((item, index) => {
                 padding: 20px;
             `;
             
-            document.body.appendChild(testDiv);
+            document.documentElement.appendChild(testDiv);
             console.log('Test div position:', testDiv.getBoundingClientRect());
             
-            // Also try with our modal
-            const newModal = document.createElement('div');
-            newModal.id = 'emergency-modal';
-            newModal.innerHTML = 'EMERGENCY MODAL - RED BACKGROUND';
-            newModal.style.cssText = `
-                position: fixed;
-                top: 100px;
-                left: 100px;
-                width: 300px;
-                height: 150px;
-                background: red;
-                color: white;
-                font-size: 16px;
-                z-index: 2147483646;
-                border: 3px solid yellow;
-                padding: 10px;
-            `;
-            
-            document.body.appendChild(newModal);
-            console.log('Simple modal position:', newModal.getBoundingClientRect());
-            
-            // ALSO CREATE FULL SCREEN TEST OVERLAY
-            const fullScreenTest = document.createElement('div');
-            fullScreenTest.innerHTML = `
-                <div style="text-align: center; padding: 50px;">
-                    <h1>FULL SCREEN TEST OVERLAY</h1>
-                    <p>If you can see this, the overlay is working</p>
-                    <p>Current viewport: ${window.innerWidth} x ${window.innerHeight}</p>
-                    <p>Scroll position: ${window.scrollY}</p>
-                </div>
-            `;
-            fullScreenTest.style.cssText = `
-                position: fixed;
+            // Try ABSOLUTE positioning on HTML element
+            const absoluteTest = document.createElement('div');
+            absoluteTest.innerHTML = 'ABSOLUTE ON HTML ELEMENT - SHOULD COVER FULL PAGE';
+            absoluteTest.style.cssText = `
+                position: absolute;
                 top: 0;
                 left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: rgba(0, 255, 0, 0.8);
-                color: black;
-                font-size: 18px;
-                z-index: 2147483645;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 0, 255, 0.7);
+                color: white;
+                font-size: 24px;
+                font-weight: bold;
+                z-index: 2147483647;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                text-align: center;
+                padding: 20px;
             `;
             
-            document.body.appendChild(fullScreenTest);
-            console.log('Full screen test position:', fullScreenTest.getBoundingClientRect());
+            document.documentElement.appendChild(absoluteTest);
+            console.log('Absolute test position:', absoluteTest.getBoundingClientRect());
             
             // Add close button to test modal
             const closeBtn = document.createElement('button');
@@ -356,8 +331,7 @@ workItems.forEach((item, index) => {
             closeBtn.style.cssText = 'position: absolute; top: 5px; right: 5px; z-index: 1000000;';
             closeBtn.onclick = () => {
                 testDiv.remove();
-                newModal.remove();
-                fullScreenTest.remove();
+                absoluteTest.remove();
                 
                 // Restore ALL overridden styles
                 originalStyles.forEach((originalStyle, element) => {
@@ -368,7 +342,7 @@ workItems.forEach((item, index) => {
                 
                 document.body.style.overflow = '';
             };
-            newModal.appendChild(closeBtn);
+            absoluteTest.appendChild(closeBtn);
             
             document.body.style.overflow = 'hidden';
             console.log('Simple test modals created');
