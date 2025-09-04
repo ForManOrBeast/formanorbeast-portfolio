@@ -208,8 +208,15 @@ function createVideoEmbed(url, platform) {
     return iframe;
 }
 
-workItems.forEach(item => {
-    item.addEventListener('click', () => {
+console.log('Adding click listeners to', workItems.length, 'work items');
+
+workItems.forEach((item, index) => {
+    console.log('Adding listener to item', index, 'with project:', item.dataset.project);
+    
+    item.addEventListener('click', (event) => {
+        console.log('=== WORK ITEM CLICKED ===');
+        console.log('Event target:', event.target);
+        console.log('Item clicked:', item);
         console.log('Work item clicked!');
         const projectId = item.dataset.project;
         console.log('Project ID:', projectId);
