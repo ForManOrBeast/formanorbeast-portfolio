@@ -269,8 +269,13 @@ workItems.forEach((item, index) => {
                     <button onclick="this.closest('div').parentElement.remove(); document.body.style.overflow = ''" 
                             style="position: absolute; top: -40px; right: 0; color: white; background: none; border: none; font-size: 40px; cursor: pointer;">&times;</button>
                     <h3 style="color: var(--accent-color); margin-bottom: 20px; text-align: center;">${project.title}</h3>
-                    <div style="width: 100%; height: 500px; background: #000; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
-                        ${iframe.outerHTML}
+                    <div style="width: 100%; height: 500px; background: #000; border-radius: 15px; position: relative; overflow: hidden;">
+                        <iframe src="${iframe.src}" 
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
+                                frameborder="0" 
+                                allowfullscreen 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+                        </iframe>
                     </div>
                     <p style="color: var(--text-secondary); margin-top: 20px; line-height: 1.6;">${project.description}</p>
                 </div>
