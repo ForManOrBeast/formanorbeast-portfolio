@@ -238,39 +238,38 @@ workItems.forEach((item, index) => {
             videoWrapper.appendChild(iframe);
             console.log('Appended iframe to wrapper');
             
-            // Check for parent constraints
-            let parent = document.body;
-            let constrainingParents = [];
-            while (parent && parent !== document.documentElement) {
-                const styles = getComputedStyle(parent);
-                if (styles.overflow !== 'visible' || styles.position !== 'static') {
-                    constrainingParents.push({
-                        element: parent,
-                        tagName: parent.tagName,
-                        className: parent.className,
-                        overflow: styles.overflow,
-                        position: styles.position
-                    });
-                }
-                parent = parent.parentElement;
-            }
-            console.log('Potentially constraining parents:', constrainingParents);
+            // NUCLEAR OPTION: Override ALL potential constraints
+            console.log('=== NUCLEAR MODAL OVERRIDE ===');
             
-            // Temporarily override body positioning
-            const originalBodyPosition = document.body.style.position;
-            const originalBodyTransform = document.body.style.transform;
+            // Store original styles
+            const originalStyles = new Map();
+            
+            // Override ALL elements with potential constraints
+            const allElements = document.querySelectorAll('*');
+            const constrainingElements = [];
+            
+            allElements.forEach(element => {
+                const styles = getComputedStyle(element);
+                if (styles.overflow !== 'visible' || styles.position === 'relative' || styles.position === 'fixed') {
+                    constrainingElements.push(element);
+                    originalStyles.set(element, {
+                        overflow: element.style.overflow,
+                        position: element.style.position,
+                        transform: element.style.transform
+                    });
+                    // Override the constraints
+                    element.style.overflow = 'visible';
+                    if (styles.position === 'relative') element.style.position = 'static';
+                    element.style.transform = 'none';
+                }
+            });
+            
+            console.log('Overrode', constrainingElements.length, 'constraining elements');
+            
+            // Also specifically target known problematic elements
             document.body.style.position = 'static';
             document.body.style.transform = 'none';
-            
-            // ALSO override hero section constraints
-            const heroSection = document.querySelector('.hero');
-            const originalHeroOverflow = heroSection ? heroSection.style.overflow : '';
-            const originalHeroPosition = heroSection ? heroSection.style.position : '';
-            if (heroSection) {
-                heroSection.style.overflow = 'visible';
-                heroSection.style.position = 'static';
-                console.log('Hero section constraints overridden');
-            }
+            document.documentElement.style.overflow = 'visible';
             
             // Try absolute positioning on html element instead
             const newModal = document.createElement('div');
@@ -320,14 +319,15 @@ workItems.forEach((item, index) => {
                 newModal.remove();
                 document.body.style.overflow = '';
                 document.body.style.overflowX = '';
-                // Restore original body styles
-                document.body.style.position = originalBodyPosition;
-                document.body.style.transform = originalBodyTransform;
-                // Restore hero section styles
-                if (heroSection) {
-                    heroSection.style.overflow = originalHeroOverflow;
-                    heroSection.style.position = originalHeroPosition;
-                }
+                
+                // Restore ALL overridden styles
+                originalStyles.forEach((originalStyle, element) => {
+                    element.style.overflow = originalStyle.overflow;
+                    element.style.position = originalStyle.position;
+                    element.style.transform = originalStyle.transform;
+                });
+                
+                console.log('Restored all original styles');
             };
             
             document.body.style.overflow = 'hidden';
