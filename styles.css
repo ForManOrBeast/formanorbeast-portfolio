@@ -1300,24 +1300,22 @@ section {
 }
 
 .video-wrapper {
-    position: relative;
     width: 100%;
     height: 500px;
-    max-height: 60vh;
-    overflow: hidden;
+    background: #000;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    border: none;
+    border: 2px solid red !important;
     border-radius: 15px;
-    z-index: 100003;
-    background: #000;
-}
+    display: block !important;
+    background: blue !important;
 }
 
 .modal-info {
