@@ -81,6 +81,10 @@ console.log('modalTitle:', modalTitle);
 console.log('modalDescription:', modalDescription);
 console.log('workItems count:', workItems.length);
 
+// Ensure body overflow is reset on page load
+document.body.style.overflow = '';
+document.body.style.overflowX = '';
+
 // Sample video data with YouTube and Vimeo links
 const videoData = {
     netflix: {
@@ -245,7 +249,8 @@ videoModal.addEventListener('click', (e) => {
 
 function closeModal() {
     videoModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
+    document.body.style.overflowX = '';
     // Clear iframe to stop video playback
     videoWrapper.innerHTML = '';
 }

@@ -33,7 +33,7 @@ body {
         radial-gradient(circle at 80% 20%, rgba(155, 89, 182, 0.03) 0%, transparent 50%),
         radial-gradient(circle at 40% 80%, rgba(52, 152, 219, 0.03) 0%, transparent 50%);
     color: var(--text-primary);
-    overflow-x: hidden;
+    overflow-x: auto;
     line-height: 1.6;
     perspective: 1px;
     position: relative;
@@ -1312,10 +1312,9 @@ section {
 .video-wrapper iframe {
     width: 100%;
     height: 100%;
-    border: 2px solid red !important;
+    border: none;
     border-radius: 15px;
-    display: block !important;
-    background: blue !important;
+    display: block;
 }
 
 .modal-info {
