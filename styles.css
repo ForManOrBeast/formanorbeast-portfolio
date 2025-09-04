@@ -402,7 +402,7 @@ h1, h2, h3 {
 
 /* Section Styles */
 section {
-    padding: 100px 0;
+    padding: 60px 0;
     position: relative;
     transform: translateZ(0);
 }
@@ -547,7 +547,7 @@ section {
 
 /* Skills Section */
 .skills-section {
-    padding: 100px 0;
+    padding: 60px 0;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     /* PLACEHOLDER: Technical/computer setup image */
     background-image: linear-gradient(135deg, rgba(10,10,10,0.93) 0%, rgba(26,26,26,0.93) 100%), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920');
@@ -930,7 +930,7 @@ section {
 
 /* Blog Section */
 .blog-section {
-    padding: 100px 0;
+    padding: 60px 0;
     background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
     /* PLACEHOLDER: Writing/creative workspace image */
     background-image: linear-gradient(135deg, rgba(26,26,26,0.94) 0%, rgba(15,15,15,0.94) 100%), url('https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1920');
