@@ -328,18 +328,28 @@ workItems.forEach((item, index) => {
             document.documentElement.appendChild(testDiv);
             console.log('Test div position:', testDiv.getBoundingClientRect());
             
-            // Try ABSOLUTE positioning on HTML element
+            // FIXED: Account for scroll position!
+            const scrollY = window.scrollY;
+            console.log('FIXING SCROLL OFFSET:', scrollY);
+            
             const absoluteTest = document.createElement('div');
-            absoluteTest.innerHTML = 'ABSOLUTE ON HTML ELEMENT - SHOULD COVER FULL PAGE';
+            absoluteTest.innerHTML = `
+                <div style="text-align: center;">
+                    <h1>SUCCESS! SCROLL-AWARE MODAL</h1>
+                    <p>Scroll position was: ${scrollY}px</p>
+                    <p>Modal now positioned correctly!</p>
+                    <p>This should cover the ENTIRE viewport</p>
+                </div>
+            `;
             absoluteTest.style.cssText = `
                 position: absolute;
-                top: 0;
+                top: ${scrollY}px;
                 left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(255, 0, 255, 0.7);
-                color: white;
-                font-size: 24px;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 255, 0, 0.9);
+                color: black;
+                font-size: 20px;
                 font-weight: bold;
                 z-index: 2147483647;
                 display: flex;
