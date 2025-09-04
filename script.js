@@ -241,6 +241,23 @@ workItems.forEach((item, index) => {
             videoModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             console.log('Modal should now be visible');
+            
+            // Debug modal visibility
+            setTimeout(() => {
+                console.log('=== MODAL DEBUG ===');
+                console.log('Modal display:', getComputedStyle(videoModal).display);
+                console.log('Modal visibility:', getComputedStyle(videoModal).visibility);
+                console.log('Modal position:', videoModal.getBoundingClientRect());
+                
+                const modalContent = document.querySelector('.modal-content');
+                console.log('Modal content position:', modalContent.getBoundingClientRect());
+                console.log('Modal content display:', getComputedStyle(modalContent).display);
+                
+                const videoContainer = document.querySelector('.modal-video-container');
+                console.log('Video container position:', videoContainer.getBoundingClientRect());
+                
+                console.log('Video wrapper position:', videoWrapper.getBoundingClientRect());
+            }, 100);
         } else {
             console.log('No project data found for:', projectId);
         }
