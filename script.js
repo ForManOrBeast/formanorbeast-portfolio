@@ -278,7 +278,19 @@ workItems.forEach((item, index) => {
                 videoModal.style.right = '0px';
                 videoModal.style.bottom = '0px';
                 videoModal.style.transform = 'none';
+                videoModal.style.display = 'flex';
+                videoModal.style.alignItems = 'center';
+                videoModal.style.justifyContent = 'center';
+                
+                // Also force position the modal content to be centered
+                const modalContent = document.querySelector('.modal-content');
+                modalContent.style.position = 'relative';
+                modalContent.style.margin = 'auto';
+                modalContent.style.maxWidth = '800px';
+                modalContent.style.width = '90%';
+                
                 console.log('Force-positioned modal, new position:', videoModal.getBoundingClientRect());
+                console.log('Modal content after centering:', modalContent.getBoundingClientRect());
             }, 100);
         } else {
             console.log('No project data found for:', projectId);
