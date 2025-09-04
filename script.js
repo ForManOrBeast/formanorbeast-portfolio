@@ -232,11 +232,12 @@ workItems.forEach((item, index) => {
             videoWrapper.innerHTML = '';
             console.log('Cleared video wrapper');
             
-            // Create and append new iframe
-            const iframe = createVideoEmbed(project.videoUrl, project.platform);
-            console.log('Created iframe:', iframe);
-            videoWrapper.appendChild(iframe);
-            console.log('Appended iframe to wrapper');
+            // TEMPORARILY DISABLE VIDEO TO TEST POSITIONING
+            console.log('VIDEO DISABLED FOR POSITIONING TEST');
+            // const iframe = createVideoEmbed(project.videoUrl, project.platform);
+            // console.log('Created iframe:', iframe);
+            // videoWrapper.appendChild(iframe);
+            // console.log('Appended iframe to wrapper');
             
             // NUCLEAR OPTION: Override ALL potential constraints
             console.log('=== NUCLEAR MODAL OVERRIDE ===');
@@ -292,7 +293,7 @@ workItems.forEach((item, index) => {
                 color: black;
                 font-size: 20px;
                 font-weight: bold;
-                z-index: 999999;
+                z-index: 2147483647;
                 border: 5px solid magenta;
                 padding: 20px;
             `;
@@ -313,13 +314,41 @@ workItems.forEach((item, index) => {
                 background: red;
                 color: white;
                 font-size: 16px;
-                z-index: 999998;
+                z-index: 2147483646;
                 border: 3px solid yellow;
                 padding: 10px;
             `;
             
             document.body.appendChild(newModal);
             console.log('Simple modal position:', newModal.getBoundingClientRect());
+            
+            // ALSO CREATE FULL SCREEN TEST OVERLAY
+            const fullScreenTest = document.createElement('div');
+            fullScreenTest.innerHTML = `
+                <div style="text-align: center; padding: 50px;">
+                    <h1>FULL SCREEN TEST OVERLAY</h1>
+                    <p>If you can see this, the overlay is working</p>
+                    <p>Current viewport: ${window.innerWidth} x ${window.innerHeight}</p>
+                    <p>Scroll position: ${window.scrollY}</p>
+                </div>
+            `;
+            fullScreenTest.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 255, 0, 0.8);
+                color: black;
+                font-size: 18px;
+                z-index: 2147483645;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            document.body.appendChild(fullScreenTest);
+            console.log('Full screen test position:', fullScreenTest.getBoundingClientRect());
             
             // Add close button to test modal
             const closeBtn = document.createElement('button');
@@ -328,6 +357,7 @@ workItems.forEach((item, index) => {
             closeBtn.onclick = () => {
                 testDiv.remove();
                 newModal.remove();
+                fullScreenTest.remove();
                 
                 // Restore ALL overridden styles
                 originalStyles.forEach((originalStyle, element) => {
@@ -335,6 +365,8 @@ workItems.forEach((item, index) => {
                     element.style.position = originalStyle.position;
                     element.style.transform = originalStyle.transform;
                 });
+                
+                document.body.style.overflow = '';
             };
             newModal.appendChild(closeBtn);
             
