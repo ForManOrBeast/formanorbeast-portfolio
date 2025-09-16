@@ -242,18 +242,20 @@ workItems.forEach((item, index) => {
             
             const videoModal = document.createElement('div');
             videoModal.id = 'video-modal-overlay';
+            // Use 100% instead of 100vw to avoid horizontal scroll issues on mobile
+            const isMobile = window.innerWidth <= 768;
             videoModal.style.cssText = `
                 position: absolute;
                 top: ${scrollY}px;
                 left: 0;
-                width: 100vw;
+                width: ${isMobile ? '100%' : '100vw'};
                 height: 100vh;
                 background: rgba(0, 0, 0, 0.9);
                 z-index: 2147483647;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 20px;
+                padding: ${isMobile ? '10px' : '20px'};
                 cursor: pointer;
             `;
             
