@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Olive green background with rounded corners -->
+  <rect width="32" height="32" rx="4" fill="#768d5e"/>
+
+  <!-- FM text on top line -->
+  <text x="16" y="14"
+        font-family="Arial, sans-serif"
+        font-size="12"
+        font-weight="bold"
+        fill="white"
+        text-anchor="middle">FM</text>
+
+  <!-- OB text on bottom line -->
+  <text x="16" y="25"
+        font-family="Arial, sans-serif"
+        font-size="12"
+        font-weight="bold"
+        fill="white"
+        text-anchor="middle">OB</text>
+</svg>
