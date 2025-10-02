@@ -634,6 +634,15 @@ section {
     100% { background-position: -200% 0; }
 }
 
+/* Fix for From Billet to Bat thumbnail */
+.work-item[data-project="dicks"] .work-thumbnail img {
+    transform: scale(1.02);
+}
+
+.work-item[data-project="dicks"]:hover .work-thumbnail img {
+    transform: scale(1.12);
+}
+
 .work-item:hover .work-thumbnail img {
     transform: scale(1.1);
 }
