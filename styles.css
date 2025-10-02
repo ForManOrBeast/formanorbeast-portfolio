@@ -874,6 +874,7 @@ section {
     align-items: center;
 }
 
+a.client-logo,
 .client-logo {
     display: inline-flex;
     align-items: center;
@@ -885,6 +886,8 @@ section {
     border-radius: 12px;
     filter: grayscale(100%);
     opacity: 0.6;
+    text-decoration: none;
+    color: inherit;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
     position: relative;
