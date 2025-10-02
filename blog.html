@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - For Man or Beast</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-deepolive.css">
     <style>
         .blog-page {
-            background: #0a0a0a;
+            background: linear-gradient(135deg, #2d3829 0%, #1a201a 100%);
+            background-attachment: fixed;
             min-height: 100vh;
             padding-top: 100px;
         }
@@ -18,14 +19,20 @@
             padding: 0 20px;
         }
         .blog-post {
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--blur-amount));
-            border: 1px solid var(--glass-border);
+            background: rgba(118, 141, 94, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(118, 141, 94, 0.2);
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 40px;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .blog-post:hover {
+            background: rgba(118, 141, 94, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(118, 141, 94, 0.15);
         }
         .blog-post::before {
             content: '';
@@ -34,11 +41,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            background: linear-gradient(135deg, rgba(118, 141, 94, 0.1) 0%, rgba(118, 141, 94, 0) 100%);
             pointer-events: none;
         }
         .blog-post-date {
-            color: var(--accent-color);
+            color: #8fa677;
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 15px;
@@ -46,14 +53,18 @@
             letter-spacing: 1px;
         }
         .blog-post-title {
-            color: var(--text-primary);
+            color: #ffffff;
             font-family: 'Bebas Neue', cursive;
             font-size: 32px;
             margin-bottom: 25px;
             letter-spacing: 1px;
+            background: linear-gradient(135deg, #768d5e 0%, #8fa677 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .blog-post-content {
-            color: var(--text-secondary);
+            color: #c0d0b0;
             line-height: 1.7;
             font-size: 16px;
         }
@@ -70,30 +81,57 @@
         .blog-header h1 {
             font-family: 'Bebas Neue', cursive;
             font-size: 48px;
-            color: var(--text-primary);
+            color: #ffffff;
             margin-bottom: 15px;
             letter-spacing: 2px;
+            background: linear-gradient(135deg, #768d5e 0%, #8fa677 50%, #a0b88c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .blog-header p {
-            color: var(--text-secondary);
+            color: #c0d0b0;
             font-size: 18px;
         }
         .back-to-site {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            color: var(--accent-color);
+            color: #8fa677;
             text-decoration: none;
             font-weight: 600;
             margin-bottom: 40px;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
         .back-to-site:hover {
             transform: translateX(-5px);
+            color: #768d5e;
         }
         .back-to-site svg {
             width: 16px;
             height: 16px;
+        }
+        .blog-post-content strong {
+            color: #8fa677;
+            font-weight: 600;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(118, 141, 94, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(118, 141, 94, 0.3);
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(118, 141, 94, 0.5);
         }
     </style>
 </head>
@@ -109,7 +147,7 @@
             
             <div class="blog-header">
                 <h1>For Man or Beast Blog</h1>
-                <p>Insights, experiences, and thoughts on video production</p>
+                <p>Thoughts on video production, workflows, and industry trends, and the occasional general ramblings</p>
             </div>
 
             <article class="blog-post">

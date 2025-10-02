@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Scheme Options - For Man or Beast</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .schemes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .scheme-card {
+            background: #2a2a2a;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .scheme-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .scheme-header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .scheme-header h2 {
+            margin-bottom: 10px;
+        }
+
+        .scheme-preview {
+            padding: 30px;
+            min-height: 300px;
+            position: relative;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .color-swatch:hover::after {
+            content: attr(data-color);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .sample-elements {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sample-button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .sample-card {
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .sample-text {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .apply-button {
+            margin: 20px auto;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        /* Scheme 1: Current Dark Theme */
+        .scheme-1 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f0f 100%);
+        }
+        .scheme-1 .sample-button {
+            background: #ff6b6b;
+            color: white;
+        }
+        .scheme-1 .sample-button:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+        .scheme-1 .sample-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Scheme 2: Hunter Forest */
+        .scheme-2 {
+            background: linear-gradient(135deg, #1b2f1b 0%, #0d1a0d 100%);
+        }
+        .scheme-2 .sample-button {
+            background: linear-gradient(45deg, #7ba05b, #95b46a);
+            color: #0d1a0d;
+            font-weight: 600;
+        }
+        .scheme-2 .sample-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(123, 160, 91, 0.4);
+        }
+        .scheme-2 .sample-card {
+            background: rgba(123, 160, 91, 0.08);
+            border: 1px solid rgba(123, 160, 91, 0.2);
+        }
+        .scheme-2 .sample-text {
+            color: #c4d4b8;
+        }
+
+        /* Scheme 3: Deep Olive */
+        .scheme-3 {
+            background: linear-gradient(135deg, #2d3829 0%, #1a201a 100%);
+        }
+        .scheme-3 .sample-button {
+            background: linear-gradient(45deg, #768d5e, #8fa677);
+            color: white;
+        }
+        .scheme-3 .sample-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(118, 141, 94, 0.3);
+        }
+        .scheme-3 .sample-card {
+            background: rgba(118, 141, 94, 0.1);
+            border: 1px solid rgba(118, 141, 94, 0.2);
+        }
+        .scheme-3 .sample-text {
+            color: #c0d0b0;
+        }
+
+        /* Scheme 4: Forest Moss */
+        .scheme-4 {
+            background: linear-gradient(135deg, #2d4a2d 0%, #1a2e1a 100%);
+        }
+        .scheme-4 .sample-button {
+            background: linear-gradient(45deg, #8fbc8f, #90ee90);
+            color: #1a2e1a;
+            font-weight: 600;
+        }
+        .scheme-4 .sample-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(143, 188, 143, 0.3);
+        }
+        .scheme-4 .sample-card {
+            background: rgba(143, 188, 143, 0.1);
+            border: 1px solid rgba(143, 188, 143, 0.2);
+        }
+        .scheme-4 .sample-text {
+            color: #b8d4b8;
+        }
+
+        /* Scheme 5: Sunset Warm */
+        .scheme-5 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        .scheme-5 .sample-button {
+            background: #4a0e4e;
+            color: white;
+        }
+        .scheme-5 .sample-button:hover {
+            background: #81689d;
+            transform: scale(1.05);
+        }
+        .scheme-5 .sample-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+        }
+        .scheme-5 .sample-text {
+            color: #4a0e4e;
+        }
+        .scheme-5 h3 {
+            color: #4a0e4e;
+        }
+
+        /* Scheme 6: Monochrome Minimal */
+        .scheme-6 {
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+        }
+        .scheme-6 .sample-button {
+            background: #000000;
+            color: white;
+            border: 2px solid #000000;
+        }
+        .scheme-6 .sample-button:hover {
+            background: transparent;
+            color: #000000;
+        }
+        .scheme-6 .sample-card {
+            background: rgba(0, 0, 0, 0.05);
+            border: 2px solid #000000;
+        }
+        .scheme-6 .sample-text {
+            color: #333333;
+        }
+        .scheme-6 h3 {
+            color: #000000;
+        }
+        .scheme-6 .scheme-header {
+            color: #000000;
+        }
+
+        /* Scheme 7: Sage Deep */
+        .scheme-7 {
+            background: linear-gradient(135deg, #354f3c 0%, #1f2e22 100%);
+        }
+        .scheme-7 .sample-button {
+            background: linear-gradient(45deg, #87a96b, #a0b88c);
+            color: #1f2e22;
+            font-weight: 600;
+        }
+        .scheme-7 .sample-button:hover {
+            box-shadow: 0 10px 40px rgba(135, 169, 107, 0.4);
+            transform: scale(1.05);
+        }
+        .scheme-7 .sample-card {
+            background: rgba(135, 169, 107, 0.08);
+            border: 1px solid rgba(135, 169, 107, 0.2);
+        }
+        .scheme-7 .sample-text {
+            color: #c4d8c0;
+        }
+
+        /* Scheme 8: Ocean Deep */
+        .scheme-8 {
+            background: linear-gradient(135deg, #003d5b 0%, #001f3f 100%);
+        }
+        .scheme-8 .sample-button {
+            background: linear-gradient(45deg, #30c7ec, #47b8e0);
+            color: #001f3f;
+            font-weight: 600;
+        }
+        .scheme-8 .sample-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(48, 199, 236, 0.4);
+        }
+        .scheme-8 .sample-card {
+            background: rgba(48, 199, 236, 0.08);
+            border: 1px solid rgba(48, 199, 236, 0.2);
+        }
+        .scheme-8 .sample-text {
+            color: #88d8f2;
+        }
+
+        .code-section {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 50px;
+        }
+
+        .code-section h2 {
+            margin-bottom: 20px;
+        }
+
+        .css-variables {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .copy-button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Color Scheme Options</h1>
+
+        <div class="schemes-grid">
+            <!-- Scheme 1: Current Dark Theme -->
+            <div class="scheme-card">
+                <div class="scheme-header">
+                    <h2>Current Dark Theme</h2>
+                    <p>Modern, bold with red accents</p>
+                </div>
+                <div class="scheme-preview scheme-1">
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #1a1a2e;" data-color="#1a1a2e"></div>
+                        <div class="color-swatch" style="background: #0f0f0f;" data-color="#0f0f0f"></div>
+                        <div class="color-swatch" style="background: #ff6b6b;" data-color="#ff6b6b"></div>
+                        <div class="color-swatch" style="background: #ffffff;" data-color="#ffffff"></div>
+                        <div class="color-swatch" style="background: rgba(255,255,255,0.1);" data-color="rgba(255,255,255,0.1)"></div>
+                    </div>
+                    <div class="sample-elements">
+                        <div class="sample-card">
+                            <h3>For Man or Beast</h3>
+                            <p class="sample-text">Cutting-edge video editing with style.</p>
+                        </div>
+                        <button class="sample-button">View My Work</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheme 5: Sunset Warm -->
+            <div class="scheme-card">
+                <div class="scheme-header">
+                    <h2>Sunset Warm</h2>
+                    <p>Energetic, friendly, vibrant</p>
+                </div>
+                <div class="scheme-preview scheme-5">
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #fa709a;" data-color="#fa709a"></div>
+                        <div class="color-swatch" style="background: #fee140;" data-color="#fee140"></div>
+                        <div class="color-swatch" style="background: #4a0e4e;" data-color="#4a0e4e"></div>
+                        <div class="color-swatch" style="background: #81689d;" data-color="#81689d"></div>
+                        <div class="color-swatch" style="background: #ffffff;" data-color="#ffffff"></div>
+                    </div>
+                    <div class="sample-elements">
+                        <div class="sample-card">
+                            <h3>For Man or Beast</h3>
+                            <p class="sample-text">Cutting-edge video editing with style.</p>
+                        </div>
+                        <button class="sample-button">View My Work</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheme 6: Monochrome Minimal -->
+            <div class="scheme-card">
+                <div class="scheme-header">
+                    <h2>Monochrome Minimal</h2>
+                    <p>Clean, sophisticated, timeless</p>
+                </div>
+                <div class="scheme-preview scheme-6">
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #ffffff;" data-color="#ffffff"></div>
+                        <div class="color-swatch" style="background: #e0e0e0;" data-color="#e0e0e0"></div>
+                        <div class="color-swatch" style="background: #808080;" data-color="#808080"></div>
+                        <div class="color-swatch" style="background: #333333;" data-color="#333333"></div>
+                        <div class="color-swatch" style="background: #000000;" data-color="#000000"></div>
+                    </div>
+                    <div class="sample-elements">
+                        <div class="sample-card">
+                            <h3>For Man or Beast</h3>
+                            <p class="sample-text">Cutting-edge video editing with style.</p>
+                        </div>
+                        <button class="sample-button">View My Work</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheme 2: Hunter Forest -->
+            <div class="scheme-card">
+                <div class="scheme-header">
+                    <h2>Hunter Forest</h2>
+                    <p>Deep greens, natural, strong</p>
+                </div>
+                <div class="scheme-preview scheme-2">
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #1b2f1b;" data-color="#1b2f1b"></div>
+                        <div class="color-swatch" style="background: #0d1a0d;" data-color="#0d1a0d"></div>
+                        <div class="color-swatch" style="background: #7ba05b;" data-color="#7ba05b"></div>
+                        <div class="color-swatch" style="background: #95b46a;" data-color="#95b46a"></div>
+                        <div class="color-swatch" style="background: #c4d4b8;" data-color="#c4d4b8"></div>
+                    </div>
+                    <div class="sample-elements">
+                        <div class="sample-card">
+                            <h3>For Man or Beast</h3>
+                            <p class="sample-text">Cutting-edge video editing with style.</p>
+                        </div>
+                        <button class="sample-button">View My Work</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheme 3: Deep Olive -->
+            <div class="scheme-card">
+                <div class="scheme-header">
+                    <h2>Deep Olive</h2>
+                    <p>Rich, sophisticated, earthy</p>
+                </div>
+                <div class="scheme-preview scheme-3">
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #2d3829;" data-color="#2d3829"></div>
+                        <div class="color-swatch" style="background: #1a201a;" data-color="#1a201a"></div>
+                        <div class="color-swatch" style="background: #768d5e;" data-color="#768d5e"></div>
+                        <div class="color-swatch" style="background: #8fa677;" data-color="#8fa677"></div>
+                        <div class="color-swatch" style="background: #c0d0b0;" data-color="#c0d0b0"></div>
+                    </div>
+                    <div class="sample-elements">
+                        <div class="sample-card">
+                            <h3>For Man or Beast</h3>
+                            <p class="sample-text">Cutting-edge video editing with style.</p>
+                        </div>
+                        <button class="sample-button">View My Work</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheme 4: Forest Moss -->
+            <div class="scheme-card">
+                <div class="scheme-header">
+                    <h2>Forest Moss</h2>
+                    <p>Natural, organic, calming</p>
+                </div>
+                <div class="scheme-preview scheme-4">
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #2d4a2d;" data-color="#2d4a2d"></div>
+                        <div class="color-swatch" style="background: #1a2e1a;" data-color="#1a2e1a"></div>
+                        <div class="color-swatch" style="background: #8fbc8f;" data-color="#8fbc8f"></div>
+                        <div class="color-swatch" style="background: #90ee90;" data-color="#90ee90"></div>
+                        <div class="color-swatch" style="background: #b8d4b8;" data-color="#b8d4b8"></div>
+                    </div>
+                    <div class="sample-elements">
+                        <div class="sample-card">
+                            <h3>For Man or Beast</h3>
+                            <p class="sample-text">Cutting-edge video editing with style.</p>
+                        </div>
+                        <button class="sample-button">View My Work</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheme 7: Sage Deep -->
+            <div class="scheme-card">
+                <div class="scheme-header">
+                    <h2>Sage Deep</h2>
+                    <p>Sophisticated, muted greens</p>
+                </div>
+                <div class="scheme-preview scheme-7">
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #354f3c;" data-color="#354f3c"></div>
+                        <div class="color-swatch" style="background: #1f2e22;" data-color="#1f2e22"></div>
+                        <div class="color-swatch" style="background: #87a96b;" data-color="#87a96b"></div>
+                        <div class="color-swatch" style="background: #a0b88c;" data-color="#a0b88c"></div>
+                        <div class="color-swatch" style="background: #c4d8c0;" data-color="#c4d8c0"></div>
+                    </div>
+                    <div class="sample-elements">
+                        <div class="sample-card">
+                            <h3>For Man or Beast</h3>
+                            <p class="sample-text">Cutting-edge video editing with style.</p>
+                        </div>
+                        <button class="sample-button">View My Work</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheme 8: Ocean Deep -->
+            <div class="scheme-card">
+                <div class="scheme-header">
+                    <h2>Ocean Deep</h2>
+                    <p>Serene, professional, deep</p>
+                </div>
+                <div class="scheme-preview scheme-8">
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #003d5b;" data-color="#003d5b"></div>
+                        <div class="color-swatch" style="background: #001f3f;" data-color="#001f3f"></div>
+                        <div class="color-swatch" style="background: #30c7ec;" data-color="#30c7ec"></div>
+                        <div class="color-swatch" style="background: #47b8e0;" data-color="#47b8e0"></div>
+                        <div class="color-swatch" style="background: #88d8f2;" data-color="#88d8f2"></div>
+                    </div>
+                    <div class="sample-elements">
+                        <div class="sample-card">
+                            <h3>For Man or Beast</h3>
+                            <p class="sample-text">Cutting-edge video editing with style.</p>
+                        </div>
+                        <button class="sample-button">View My Work</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="code-section" id="cssCode">
+            <h2>Selected Color Scheme CSS Variables</h2>
+            <div class="css-variables" id="cssOutput">
+                <pre>/* Click on a color scheme above to see its CSS variables */</pre>
+            </div>
+            <button class="copy-button" onclick="copyCSS()">Copy CSS</button>
+        </div>
+    </div>
+
+    <script>
+        const schemes = {
+            'scheme-1': `/* Current Dark Theme */
+:root {
+    --primary-bg: linear-gradient(135deg, #1a1a2e 0%, #0f0f0f 100%);
+    --primary-dark: #1a1a2e;
+    --primary-darker: #0f0f0f;
+    --accent-color: #ff6b6b;
+    --accent-hover: #ff5252;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 255, 255, 0.1);
+}`,
+            'scheme-2': `/* Hunter Forest */
+:root {
+    --primary-bg: linear-gradient(135deg, #1b2f1b 0%, #0d1a0d 100%);
+    --primary-dark: #1b2f1b;
+    --primary-darker: #0d1a0d;
+    --accent-color: #7ba05b;
+    --accent-secondary: #95b46a;
+    --text-primary: #ffffff;
+    --text-secondary: #c4d4b8;
+    --card-bg: rgba(123, 160, 91, 0.08);
+    --border-color: rgba(123, 160, 91, 0.2);
+}`,
+            'scheme-3': `/* Deep Olive */
+:root {
+    --primary-bg: linear-gradient(135deg, #2d3829 0%, #1a201a 100%);
+    --primary-olive: #2d3829;
+    --primary-deep: #1a201a;
+    --accent-color: #768d5e;
+    --accent-secondary: #8fa677;
+    --text-primary: #ffffff;
+    --text-secondary: #c0d0b0;
+    --card-bg: rgba(118, 141, 94, 0.1);
+    --border-color: rgba(118, 141, 94, 0.2);
+}`,
+            'scheme-4': `/* Forest Moss */
+:root {
+    --primary-bg: linear-gradient(135deg, #2d4a2d 0%, #1a2e1a 100%);
+    --primary-forest: #2d4a2d;
+    --primary-deep: #1a2e1a;
+    --accent-moss: #8fbc8f;
+    --accent-light: #90ee90;
+    --text-primary: #ffffff;
+    --text-secondary: #b8d4b8;
+    --card-bg: rgba(143, 188, 143, 0.1);
+    --border-color: rgba(143, 188, 143, 0.2);
+}`,
+            'scheme-5': `/* Sunset Warm */
+:root {
+    --primary-bg: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --primary-pink: #fa709a;
+    --primary-yellow: #fee140;
+    --accent-color: #4a0e4e;
+    --accent-hover: #81689d;
+    --text-primary: #4a0e4e;
+    --text-light: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --border-color: rgba(255, 255, 255, 0.95);
+}`,
+            'scheme-6': `/* Monochrome Minimal */
+:root {
+    --primary-bg: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    --primary-white: #ffffff;
+    --primary-gray: #e0e0e0;
+    --accent-color: #000000;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --text-light: #808080;
+    --card-bg: rgba(0, 0, 0, 0.05);
+    --border-color: #000000;
+}`,
+            'scheme-7': `/* Sage Deep */
+:root {
+    --primary-bg: linear-gradient(135deg, #354f3c 0%, #1f2e22 100%);
+    --primary-sage: #354f3c;
+    --primary-deep: #1f2e22;
+    --accent-sage-light: #87a96b;
+    --accent-sage-soft: #a0b88c;
+    --text-primary: #ffffff;
+    --text-secondary: #c4d8c0;
+    --card-bg: rgba(135, 169, 107, 0.08);
+    --border-color: rgba(135, 169, 107, 0.2);
+}`,
+            'scheme-8': `/* Ocean Deep */
+:root {
+    --primary-bg: linear-gradient(135deg, #003d5b 0%, #001f3f 100%);
+    --primary-navy: #003d5b;
+    --primary-deep: #001f3f;
+    --accent-cyan: #30c7ec;
+    --accent-blue: #47b8e0;
+    --text-primary: #ffffff;
+    --text-secondary: #88d8f2;
+    --card-bg: rgba(48, 199, 236, 0.08);
+    --border-color: rgba(48, 199, 236, 0.2);
+}`
+        };
+
+        // Add click handlers to all scheme cards
+        document.querySelectorAll('.scheme-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove active state from all cards
+                document.querySelectorAll('.scheme-card').forEach(c => c.style.border = 'none');
+
+                // Add active state to clicked card
+                this.style.border = '3px solid #ff6b6b';
+
+                // Get the scheme class
+                const schemeClass = this.querySelector('.scheme-preview').classList[1];
+
+                // Update CSS output
+                if (schemes[schemeClass]) {
+                    document.getElementById('cssOutput').innerHTML = `<pre>${schemes[schemeClass]}</pre>`;
+                }
+            });
+        });
+
+        function copyCSS() {
+            const cssText = document.getElementById('cssOutput').innerText;
+            navigator.clipboard.writeText(cssText).then(() => {
+                const button = document.querySelector('.copy-button');
+                const originalText = button.innerText;
+                button.innerText = 'Copied!';
+                setTimeout(() => {
+                    button.innerText = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

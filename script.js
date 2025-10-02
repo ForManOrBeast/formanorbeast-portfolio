@@ -622,13 +622,31 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Add loading animation for images
-document.querySelectorAll('.work-thumbnail img').forEach(img => {
-    img.addEventListener('load', function() {
-        this.style.opacity = '1';
-    });
-    img.style.opacity = '0';
-    img.style.transition = 'opacity 0.5s ease';
+// Enhanced image loading with skeleton loaders
+document.querySelectorAll('.work-thumbnail').forEach(thumbnail => {
+    thumbnail.classList.add('loading');
+    const img = thumbnail.querySelector('img');
+
+    if (img) {
+        // Check if image is already cached
+        if (img.complete && img.naturalHeight !== 0) {
+            thumbnail.classList.remove('loading');
+            img.style.opacity = '1';
+        } else {
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.5s ease';
+
+            img.addEventListener('load', function() {
+                thumbnail.classList.remove('loading');
+                this.style.opacity = '1';
+            });
+
+            img.addEventListener('error', function() {
+                thumbnail.classList.remove('loading');
+                // Keep placeholder background visible on error
+            });
+        }
+    }
 });
 
 // Prevent right-click on videos (optional, for protection)
@@ -711,11 +729,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Preload critical images
+    // Preload critical images with priority
     const criticalImages = document.querySelectorAll('.work-thumbnail img');
-    criticalImages.forEach(img => {
-        const tempImg = new Image();
-        tempImg.src = img.src;
+    criticalImages.forEach((img, index) => {
+        // Add loading attribute for browser optimization
+        if (index < 3) {
+            img.loading = 'eager';
+        } else {
+            img.loading = 'lazy';
+        }
+
+        // Preload first 3 images immediately
+        if (index < 3) {
+            const tempImg = new Image();
+            tempImg.src = img.src;
+        }
     });
 });
 
@@ -724,8 +752,84 @@ document.querySelectorAll('.client-logo').forEach(logo => {
     logo.addEventListener('mouseenter', function() {
         this.style.transform = 'scale(1.1) rotate(5deg)';
     });
-    
+
     logo.addEventListener('mouseleave', function() {
         this.style.transform = 'scale(1) rotate(0)';
     });
 });
+
+// Theme Switcher Functionality
+(function() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeMenu = document.getElementById('themeMenu');
+    const themeOptions = document.querySelectorAll('.theme-option');
+    const body = document.body;
+
+    // Load saved theme from localStorage
+    const savedTheme = localStorage.getItem('selectedTheme') || 'default';
+    if (savedTheme !== 'default') {
+        body.setAttribute('data-theme', savedTheme);
+        updateActiveThemeOption(savedTheme);
+    }
+
+    // Toggle theme menu
+    themeToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        themeMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!themeMenu.contains(e.target) && !themeToggle.contains(e.target)) {
+            themeMenu.classList.remove('active');
+        }
+    });
+
+    // Handle theme selection
+    themeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const theme = this.getAttribute('data-theme');
+
+            // Add transition class
+            body.classList.add('theme-transitioning');
+
+            // Apply theme
+            if (theme === 'default') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', theme);
+            }
+
+            // Save to localStorage
+            localStorage.setItem('selectedTheme', theme);
+
+            // Update active state
+            updateActiveThemeOption(theme);
+
+            // Close menu
+            themeMenu.classList.remove('active');
+
+            // Remove transition class after animation
+            setTimeout(() => {
+                body.classList.remove('theme-transitioning');
+            }, 500);
+        });
+    });
+
+    function updateActiveThemeOption(theme) {
+        themeOptions.forEach(opt => {
+            opt.classList.remove('active');
+            if (opt.getAttribute('data-theme') === theme) {
+                opt.classList.add('active');
+            }
+        });
+    }
+
+    // Keyboard shortcut for theme switching (Ctrl/Cmd + Shift + T)
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
+            e.preventDefault();
+            themeMenu.classList.toggle('active');
+        }
+    });
+})();
