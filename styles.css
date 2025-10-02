@@ -720,9 +720,14 @@ section {
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-top: 60px;
+}
+
+.skills-grid .skill-category:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
 }
 
 .skill-category {
@@ -842,6 +847,11 @@ section {
         grid-template-columns: 1fr;
         gap: 20px;
         margin-top: 40px;
+    }
+
+    .skills-grid .skill-category:nth-child(4) {
+        grid-column: unset;
+        grid-row: unset;
     }
     
     .skill-category {
