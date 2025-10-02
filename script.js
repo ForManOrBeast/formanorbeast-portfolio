@@ -1,3 +1,64 @@
+// Easter Egg Tooltip Following Cursor
+document.addEventListener('mousemove', (e) => {
+    const tooltip = document.querySelector('.easter-egg:hover::after');
+    const easterEgg = document.querySelector('.easter-egg:hover');
+
+    if (easterEgg) {
+        const computedStyle = window.getComputedStyle(easterEgg, '::after');
+        if (computedStyle.opacity > 0) {
+            const afterElement = easterEgg.querySelector('::after');
+            if (afterElement) {
+                afterElement.style.left = e.clientX + 10 + 'px';
+                afterElement.style.top = e.clientY - 30 + 'px';
+            }
+        }
+    }
+});
+
+// Better approach for tooltip positioning
+document.addEventListener('DOMContentLoaded', () => {
+    const easterEggs = document.querySelectorAll('.easter-egg');
+
+    easterEggs.forEach(egg => {
+        let tooltip = null;
+
+        egg.addEventListener('mouseenter', (e) => {
+            tooltip = document.createElement('div');
+            tooltip.textContent = egg.getAttribute('data-tooltip');
+            tooltip.style.cssText = `
+                position: fixed;
+                background: var(--glass-bg);
+                backdrop-filter: blur(var(--blur-amount));
+                border: 1px solid var(--glass-border);
+                color: var(--text-primary);
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 14px;
+                white-space: nowrap;
+                z-index: 1000;
+                pointer-events: none;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                transition: opacity 0.3s ease;
+            `;
+            document.body.appendChild(tooltip);
+        });
+
+        egg.addEventListener('mousemove', (e) => {
+            if (tooltip) {
+                tooltip.style.left = e.clientX + 10 + 'px';
+                tooltip.style.top = e.clientY - 30 + 'px';
+            }
+        });
+
+        egg.addEventListener('mouseleave', () => {
+            if (tooltip) {
+                tooltip.remove();
+                tooltip = null;
+            }
+        });
+    });
+});
+
 // Mobile Navigation Toggle
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
@@ -89,7 +150,7 @@ document.body.style.overflowX = '';
 const videoData = {
     netflix: {
         title: 'Netflix Original Series Trailer - Editor',
-        description: 'As lead editor for this Netflix original series trailer, I crafted a high-octane narrative that builds tension while showcasing key plot points without revealing spoilers. The edit combines rapid cuts with strategic moments of silence to create maximum impact, resulting in over 5 million views in the first week.',
+        description: 'Edited promotional content featuring Natalie Portman, Julianne Moore, and Charles Melton discussing their collaborative process. Working from a loose script and raw footage, I crafted the pacing and structure to highlight authentic moments while teasing the film\'s most compelling scenes.',
         videoUrl: 'https://www.youtube.com/embed/viDRasOhQBw',
         platform: 'youtube',
         client: 'Netflix',
@@ -97,15 +158,31 @@ const videoData = {
     },
     netflix2: {
         title: 'Netflix Documentary Series - Editor',
-        description: 'Lead editor for this compelling Netflix documentary series. The editing approach emphasized emotional storytelling through careful pacing and rhythm, weaving together interviews, archival footage, and dramatic recreations to create a cohesive narrative that captivated audiences worldwide.',
+        description: 'Edited Bailey Sarian\'s full-episode reaction to Wednesday into a cohesive piece that balances her crime-sleuth commentary with makeup content. I chose the strongest moments and structured the edit to flow naturally between her insights on the show and the beauty elements.',
         videoUrl: 'https://www.youtube.com/embed/qz4TYHKJ89w',
+        platform: 'youtube',
+        client: 'Netflix',
+        role: 'Editor'
+    },
+    netflix3: {
+        title: 'Glass Onion - Solving Mysteries',
+        description: 'Edited promotional content featuring Leslie Odom Jr., Jessica Henwick, and Madelyn Cline debating lighthearted topics. I structured the edit to showcase their natural chemistry and comedic timing, creating an entertaining piece that highlights the ensemble dynamic at the heart of Glass Onion.',
+        videoUrl: 'https://www.youtube.com/embed/HQWeVG86kMI',
+        platform: 'youtube',
+        client: 'Netflix',
+        role: 'Editor'
+    },
+    netflix4: {
+        title: 'Rebel Moon - Sophia\'s Fight',
+        description: 'Edited behind-the-scenes content featuring Zack Snyder and Sofia Boutella discussing her physical preparation for the film. I assembled footage from multiple sources including BTS material, on-set phone captures used for real-time review, and finished film sequences to create an engaging piece that balances entertainment value with authentic insight into the training process.',
+        videoUrl: 'https://www.youtube.com/embed/XoNzf4IXrm8',
         platform: 'youtube',
         client: 'Netflix',
         role: 'Editor'
     },
     dicks: {
         title: "Dick's Sporting Goods Commercial - Editor",
-        description: "As editor for this Dick's Sporting Goods campaign, I created dynamic, high-energy cuts that showcase athletic performance and product features. The edit emphasizes motion and impact, perfectly capturing the spirit of sports and competition while maintaining brand consistency across multiple platform deliverables.",
+        description: 'Edited multi-cam factory tour footage into a streamlined look at Louisville Slugger\'s bat-making process. I condensed the tour into an engaging piece that showcases both the traditional craftsmanship and modern techniques behind a company with over 135 years of history in baseball bat manufacturing.',
         videoUrl: 'https://www.youtube.com/embed/d_3zPj3HQnA',
         platform: 'youtube',
         client: "Dick's Sporting Goods",
@@ -113,7 +190,7 @@ const videoData = {
     },
     dicks2: {
         title: "Dick's Sporting Goods - Videographer & Editor",
-        description: "Served as both videographer and editor for this Dick's Sporting Goods campaign. Captured dynamic footage on location, then crafted the final edit to showcase athletic excellence and product innovation. The dual role allowed for seamless integration of creative vision from shoot to final delivery.",
+        description: 'Served as videographer and editor for this Pro Tips segment featuring Blair Wiggins demonstrating proper saltwater leader techniques. I captured on-location footage and shaped the edit to make specialized fishing knowledge accessible while maintaining technical accuracy, balancing instructional clarity with product showcase for saltwater anglers.',
         videoUrl: 'https://www.youtube.com/embed/E8wUAvOcImk',
         platform: 'youtube',
         client: "Dick's Sporting Goods",
@@ -121,7 +198,7 @@ const videoData = {
     },
     dicks3: {
         title: "Dick's Sporting Goods Promo - Editor",
-        description: "Editor for this impactful Dick's Sporting Goods promotional campaign. Created a compelling narrative through strategic editing that highlights product quality and athletic achievement. The final cut successfully balanced brand messaging with emotional storytelling to drive customer engagement.",
+        description: 'Edited promotional content featuring NFL running back Stevan Ridley\'s journey toward peak performance. I structured the edit to showcase his athletic dedication and struggle while integrating product placement, creating a narrative that balances brand messaging with the authentic story of an athlete pushing his limits.',
         videoUrl: 'https://www.youtube.com/embed/U_uZx6JuYXA',
         platform: 'youtube',
         client: "Dick's Sporting Goods",
@@ -141,14 +218,14 @@ const videoData = {
     },
     shortfilm: {
         title: 'Original Short Film - Writer/Director/Cinematographer/Editor',
-        description: 'A passion project where I served as co-writer, director, cinematographer, and editor. This short film showcases my complete creative vision from concept to final cut. The project demonstrates my ability to handle all aspects of production, creating a cohesive narrative that has garnered recognition at film festivals.',
+        description: 'Co-wrote, directed, shot, and edited this short film for the Pittsburgh 48 Hour Film Project. Managing the complete production pipeline under tight time constraints, I crafted a cohesive narrative that earned Best Film and Best Editing awards, demonstrating my ability to execute a unified creative vision across all filmmaking disciplines.',
         videoUrl: 'https://www.youtube.com/embed/C6Hnr7fw5IM',
         platform: 'youtube',
         role: 'Co-Writer / Director / Cinematographer / Editor'
     },
     duolingo: {
         title: 'Duolingo Campaign - Director/DP/Editor/Animator',
-        description: 'Served as director, cinematographer, editor, and animator for this innovative Duolingo campaign. Combined live-action footage with animated elements to create an engaging educational narrative that aligns with Duolingo\'s playful brand identity while effectively communicating language learning concepts.',
+        description: 'Served as director, DP, editor, and animator for this campaign. I combined live-action footage with basic animation to create digestible content for an audience using English as a second language, explaining updates to the Duolingo English Test while maintaining the brand\'s playful identity.',
         videoUrl: 'https://www.youtube.com/embed/HWyga5E3Kpg',
         platform: 'youtube',
         client: 'Duolingo',
@@ -156,7 +233,7 @@ const videoData = {
     },
     duolingo2: {
         title: 'Duolingo Social Content - Director/DP/Editor/Animator',
-        description: 'Created dynamic social media content for Duolingo, handling all aspects from direction and cinematography to editing and animation. This project showcased the app\'s features through visually engaging storytelling, contributing to increased user engagement and brand awareness across digital platforms.',
+        description: 'Directed, shot, edited, and animated social media content answering frequently asked questions about the Duolingo English Test. I created visually engaging explanations designed for an ESL audience, using a mix of live-action and basic animation to make complex testing information accessible across digital platforms.',
         videoUrl: 'https://www.youtube.com/embed/JFMcCLt7Vr8',
         platform: 'youtube',
         client: 'Duolingo',
@@ -164,7 +241,7 @@ const videoData = {
     },
     unitedway: {
         title: 'United Way Campaign - Editor/Animator',
-        description: 'As editor and animator for United Way through Hullaballoo Agency, I crafted an emotionally resonant narrative that highlights community impact and social change. The project combined thoughtful editing with purposeful animation to create a compelling call-to-action that drives donor engagement and volunteer participation.',
+        description: 'Edited and animated this piece for United Way, crafting a narrative that highlights community impact and social change. I combined thoughtful editing with simple animation to draw attention to powerful audio testimonials, creating an emotionally resonant story about the organization\'s work.',
         videoUrl: 'https://www.youtube.com/embed/TSarIt77ZCM',
         platform: 'youtube',
         client: 'United Way (Hullaballoo Agency)',
@@ -172,7 +249,7 @@ const videoData = {
     },
     pozitivf: {
         title: 'PozitIVF - Editor/Animator',
-        description: 'Editor and animator for PozitIVF through Hullaballoo Agency, creating sensitive and informative content for fertility services. The project required a delicate balance of professionalism and empathy, using thoughtful editing and subtle animation to convey hope and medical expertise while maintaining emotional resonance with prospective patients.',
+        description: 'Edited and animated informative content for PozitIVF\'s fertility services. I used thoughtful pacing and subtle animation to balance medical expertise with emotional sensitivity, creating content that conveys hope and professionalism while resonating with prospective patients navigating their fertility journey.',
         videoUrl: 'https://www.youtube.com/embed/nb65P731l_c',
         platform: 'youtube',
         client: 'PozitIVF (Hullaballoo Agency)',

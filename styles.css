@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+/* Easter Egg Tooltip */
+.easter-egg {
+    cursor: help;
+}
+
 /* Prevent horizontal overflow */
 html, body {
     overflow-x: hidden;
