@@ -618,8 +618,8 @@ contactForm.addEventListener('submit', async (e) => {
         };
         
         const response = await emailjs.send(
-            'service_hfpqhn2',  // Replace with your EmailJS service ID
-            'template_d9gfg89', // Replace with your EmailJS template ID
+            'service_g8s0fig',  // EmailJS service ID
+            'template_d9gfg89', // EmailJS template ID
             templateParams
         );
         
