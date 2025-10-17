@@ -482,6 +482,9 @@ document.addEventListener('keydown', (e) => {
 // Contact Form Handler with Validation
 const contactForm = document.getElementById('contactForm');
 
+// Bot protection: Track when form is loaded
+let formLoadTime = Date.now();
+
 // Email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -574,20 +577,37 @@ document.head.appendChild(shakeStyle);
 
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     // Clear all errors
     ['name', 'email', 'message'].forEach(clearError);
-    
+
+    // Bot protection: Check honeypot field
+    const honeypot = document.getElementById('website').value;
+    if (honeypot) {
+        // Honeypot was filled - likely a bot
+        console.log('Bot detected: honeypot filled');
+        // Silently fail - don't give feedback to the bot
+        return;
+    }
+
+    // Bot protection: Check if form was submitted too quickly (less than 3 seconds)
+    const timeSinceLoad = Date.now() - formLoadTime;
+    if (timeSinceLoad < 3000) {
+        console.log('Bot detected: form submitted too quickly');
+        // Silently fail - don't give feedback to the bot
+        return;
+    }
+
     // Get form data
     const formData = {
         name: document.getElementById('name').value.trim(),
         email: document.getElementById('email').value.trim(),
         message: document.getElementById('message').value.trim()
     };
-    
+
     // Validate form
     const errors = validateForm(formData);
-    
+
     if (errors.length > 0) {
         // Show errors
         errors.forEach(error => {
